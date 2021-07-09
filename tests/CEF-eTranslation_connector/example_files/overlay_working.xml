@@ -1,0 +1,21 @@
+<PcGts xmlns="http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15">
+    <Metadata>
+        <Creator>prov = Brno University of Technology/Faculty of Information Technology/Michal Hradi&#353;/
+            ihradis@fit.vut.cz: name = PERO OCR:
+        </Creator>
+        <Created>2021-02-26T18:00:01.337363</Created>
+        <LastChange>2021-02-26T18:00:01.337363</LastChange>
+    </Metadata>
+    <Page imageFilename="KB_JB840_1919-04-01_01_0.png" imageWidth="4058" imageHeight="5171">
+        <TextRegion id="f96ze8c0-54ef-4590-bfe2-140e7e238576">
+            <Coords points="303,130 250,163 258,226 256,296 535,300 537,232 553,197 553,169 504,135 303,130"/>
+            <TextLine id="d393e17a-ad27-4c49-bcbf-1961a48af93e" custom="heights_v2:[19.7,7.4]">
+                <Coords points="305,132 305,159 331,159 356,161 379,163 404,163 428,163 451,163 475,163 503,165 505,138 477,136 451,136 428,136 404,136 379,136 358,134 334,132 305,132"/>
+                <Baseline points="305,152 332,152 356,154 379,156 404,156 428,156 451,156 475,156 504,158"/>
+                <TextEquiv>
+                    <Unicode>trouw deze</Unicode>
+                </TextEquiv>
+            </TextLine>
+        </TextRegion>
+    </Page>
+</PcGts>
