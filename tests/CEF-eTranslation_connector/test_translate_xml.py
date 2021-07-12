@@ -5,7 +5,7 @@ import unittest
 from lxml import etree
 
 from connector.translate_connector import ETranslationConnector
-from orm import PageXML
+from xml_orm.orm import PageXML
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
 FOLDER_EXAMPLE_FILES = os.path.join(ROOT, 'tests/CEF-eTranslation_connector/example_files')

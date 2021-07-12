@@ -11,11 +11,13 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from starlette.responses import StreamingResponse
+from xml_orm.orm import XLIFFPageXML
 
 from connector.translate_connector import ETranslationConnector
-from xml_orm.orm import XLIFFPageXML
+from tm.tm_connector import MouseTmConnector
 from . import crud, models, schemas
 from .database import SessionLocal, engine
+from .schemas import XMLDocumentCreate, XMLDocumentLineCreate
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -239,3 +241,29 @@ def _read_page_xml_translation(xml_id, target, db):
 def read_trans_xmls(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     users = crud.get_xmls_trans(db, skip=skip, limit=limit)
     return users
+
+
+def _parse_text_page_xml(lines, source, target, db):
+    document = XMLDocumentCreate(
+        source=source,
+        target=target
+    )
+
+    for line in lines:
+        XMLDocumentLineCreate(
+            text=line
+        )
+
+
+def _lookup_tm_match(segment, langpair):
+    mouse = MouseTmConnector()
+
+    matches = mouse.lookup_tu(False, "", langpair, segment)
+
+    full_match = ""
+    for match in matches:
+        if match["match"] >= 1.0:
+            full_match = match["translation"]
+            break
+
+    return full_match

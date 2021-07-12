@@ -1,4 +1,5 @@
-from sqlalchemy import Boolean, Column, Integer, String, DateTime
+from sqlalchemy import Boolean, Column, Integer, String, DateTime, ForeignKey
+from sqlalchemy.orm import relationship
 
 from .database import Base
 
@@ -22,3 +23,30 @@ class XMLTrans(Base):
     finished = Column(DateTime, default=None)
 
     is_translated = Column(Boolean, default=False)
+
+
+class XMLDocument(Base):
+    """
+    Table that holds XML document info
+    """
+    __tablename__ = "document"
+
+    id = Column(Integer, primary_key=True, index=True)
+    source = Column(String)
+    target = Column(String)
+
+    lines = relationship("XMLDocumentLine", back_populates="document")
+
+
+class XMLDocumentLine(Base):
+    """
+    Table that holds a single XML document text line
+    """
+    __tablename__ = "line"
+
+    id = Column(Integer, primary_key=True, index=True)
+    text = Column(String)
+    match = Column(String)
+    document_id = Column(Integer, ForeignKey("document.id"))
+
+    document = relationship("XMLDocument", back_populates="lines")

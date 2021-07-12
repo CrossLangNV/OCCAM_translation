@@ -13,5 +13,6 @@ services:
     volumes:
       - ./api:/app/API/translation
       - ./CEF-eTranslation_connector:/app
+      - ./tm:/app/tm
       - ./tests/CEF-eTranslation_connector/example_files:/opt/tests/CEF-eTranslation_connector/example_files
       - ./CLARIAH-VL_examples:/opt/CLARIAH-VL_examples

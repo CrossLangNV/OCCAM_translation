@@ -1,3 +1,5 @@
+from typing import List
+
 from pydantic import BaseModel
 
 
@@ -15,6 +17,40 @@ class XMLTransCreate(XMLTransBase):
 
 class XMLTrans(XMLTransBase):
     id: int
+
+    class Config:
+        orm_mode = True
+
+
+class XMLDocumentLineBase(BaseModel):
+    text: str
+    match: str
+
+
+class XMLDocumentLineCreate(XMLDocumentLineBase):
+    pass
+
+
+class XMLDocumentLine(XMLDocumentLineBase):
+    id: int
+    document_id: int
+
+    class Config:
+        orm_mode = True
+
+
+class XMLDocumentBase(BaseModel):
+    source: str
+    target: str
+
+
+class XMLDocumentCreate(XMLDocumentBase):
+    pass
+
+
+class XMLDocument(XMLDocumentBase):
+    id: int
+    lines: List[XMLDocumentLine] = []
 
     class Config:
         orm_mode = True
