@@ -5,7 +5,7 @@ import unittest
 from fastapi.testclient import TestClient
 from lxml import etree
 
-from api.main import app, _lookup_tm_match
+from api.main import app, _lookup_full_tm_match, _parse_text_page_xml
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
 
@@ -330,9 +330,16 @@ def _get_tree_base():
 class TestParseXMLTextLines(unittest.TestCase):
 
     def test_lookup_full_tm_match(self):
-        full_match = _lookup_tm_match('this is a test', 'en-nl')
+        full_match = _lookup_full_tm_match('this is a test', 'en-nl')
         print(full_match)
         return full_match
+
+    def test_parse_text_page_xml(self):
+        lines = ['this', 'this is a', 'this is a test']
+        db_xml_document = _parse_text_page_xml(lines, 'en', 'nl')
+        for db_line in db_xml_document.lines:
+            print(db_line.text)
+        return db_xml_document
 
 
 if __name__ == '__main__':

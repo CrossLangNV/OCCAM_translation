@@ -243,19 +243,26 @@ def read_trans_xmls(skip: int = 0, limit: int = 100, db: Session = Depends(get_d
     return users
 
 
-def _parse_text_page_xml(lines, source, target, db):
-    document = XMLDocumentCreate(
+def _parse_text_page_xml(lines, source, target):
+    db = next(get_db())
+    xml_document = XMLDocumentCreate(
         source=source,
         target=target
     )
 
+    db_xml_document = crud.create_xml_document(db, xml_document)
+
     for line in lines:
-        XMLDocumentLineCreate(
-            text=line
+        xml_document_line = XMLDocumentLineCreate(
+            text=line,
+            document_id=db_xml_document.id
         )
+        crud.create_xml_document_line(db, xml_document_line, db_xml_document.id)
+
+    return db_xml_document
 
 
-def _lookup_tm_match(segment, langpair):
+def _lookup_full_tm_match(segment, langpair):
     mouse = MouseTmConnector()
 
     matches = mouse.lookup_tu(False, "", langpair, segment)

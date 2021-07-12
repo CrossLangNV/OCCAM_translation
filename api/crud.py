@@ -30,3 +30,36 @@ def create_xml_trans(db: Session,
     db.commit()
     db.refresh(db_xml_trans)
     return db_xml_trans
+
+
+def get_document(db: Session, document_id: str):
+    return db.query(models.XMLDocument).filter(models.XMLDocument.id == document_id).first()
+
+
+def get_documents(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(models.XMLDocument).offset(skip).limit(limit).all()
+
+
+def create_xml_document(db: Session, xml_document: schemas.XMLDocumentCreate):
+    db_xml_document = models.XMLDocument(
+        source=xml_document.source,
+        target=xml_document.target
+    )
+    db.add(db_xml_document)
+    db.commit()
+    db.refresh(db_xml_document)
+    return db_xml_document
+
+
+def get_lines(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(models.XMLDocumentLine).offset(skip).limit(limit).all()
+
+
+def create_xml_document_line(db: Session, line: schemas.XMLDocumentLineCreate, document_id: int):
+    db_xml_document_line = models.XMLDocumentLine(
+        **line.dict(), document_id=document_id
+    )
+    db.add(db_xml_document_line)
+    db.commit()
+    db.refresh(db_xml_document_line)
+    return db_xml_document_line
