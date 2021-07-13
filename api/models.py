@@ -13,6 +13,7 @@ class XMLTrans(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     etranslation_id = Column(String, unique=True, index=True)
+    xml_document_id = Column(Integer, ForeignKey("document.id"))
     xml_content = Column(String)
     filename = Column(String, index=True)
 

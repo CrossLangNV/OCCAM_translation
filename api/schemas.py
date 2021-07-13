@@ -9,6 +9,7 @@ class XMLTransBase(BaseModel):
     filename: str
     source: str
     target: str
+    xml_document_id: int
 
 
 class XMLTransCreate(XMLTransBase):
@@ -24,6 +25,7 @@ class XMLTrans(XMLTransBase):
 
 class XMLDocumentLineBase(BaseModel):
     text: str
+    match: str
 
 
 class XMLDocumentLineCreate(XMLDocumentLineBase):
@@ -33,7 +35,6 @@ class XMLDocumentLineCreate(XMLDocumentLineBase):
 class XMLDocumentLine(XMLDocumentLineBase):
     id: int
     document_id: int
-    match: str
 
     class Config:
         orm_mode = True

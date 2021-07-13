@@ -17,6 +17,7 @@ from connector.translate_connector import ETranslationConnector
 from tm.tm_connector import MouseTmConnector
 from . import crud, models, schemas
 from .database import SessionLocal, engine
+from .models import XMLDocument
 from .schemas import XMLDocumentCreate, XMLDocumentLineCreate
 
 models.Base.metadata.create_all(bind=engine)
@@ -181,20 +182,26 @@ def _submit_page_xml_translation(xml, source, target, filename,
     # First send trans requests, then request the response.
     lines_text = xml.get_lines_text()
 
+    db_xml_document = _parse_text_page_xml(lines_text, source, target, db)
+    lines = []
+    for document_line in db_xml_document.lines:
+        if document_line.match:
+            lines.append('')
+        else:
+            lines.append(document_line.text)
     with tempfile.TemporaryDirectory() as tmp_dir:
         tmp_file = os.path.join(tmp_dir, 'tmp_text_lines.txt')
-        s_tmp = ''.join(text_i + '\n' for text_i in lines_text)
+        s_tmp = ''.join(text_i + '\n' for text_i in lines)
         with open(tmp_file, 'w') as f:
             f.write(s_tmp)
-
-        id_doc = connector.trans_doc(source, target,
-                                     tmp_file)
+        id_doc = connector.trans_doc(source, target, tmp_file)
 
     xml_trans = schemas.XMLTransCreate(etranslation_id=id_doc,
                                        xml_content=xml.to_bstring(),
                                        filename=filename,
                                        source=source,
-                                       target=target)
+                                       target=target,
+                                       xml_document_id=db_xml_document.id)
 
     db_xml_trans = crud.create_xml_trans(db=db,
                                          xml_trans=xml_trans,
@@ -208,14 +215,15 @@ def _read_page_xml_translation(xml_id, target, db):
     connector = ETranslationConnector()
 
     r = connector.trans_doc_id(xml_id)
+    db_xml_trans = crud.get_xml_by_etranslation_id(db=db,
+                                                   etranslation_id=xml_id)
+    db_xml_document = crud.get_document(db=db, document_id=db_xml_trans.xml_document_id)
     if r:
         l_trans_text = list(map(str.strip, r.get('content').decode('UTF-8').splitlines()))
+        l_trans_text = _update_trans_text_lines_with_matches(l_trans_text, db_xml_document)
     else:
         content = {'message': 'translation not finished.'}
         return JSONResponse(content, status_code=423)
-
-    db_xml_trans = crud.get_xml_by_etranslation_id(db=db,
-                                                   etranslation_id=xml_id)
 
     xml = XLIFFPageXML(io.BytesIO(db_xml_trans.xml_content.encode('utf-8')))
 
@@ -243,8 +251,7 @@ def read_trans_xmls(skip: int = 0, limit: int = 100, db: Session = Depends(get_d
     return users
 
 
-def _parse_text_page_xml(lines, source, target):
-    db = next(get_db())
+def _parse_text_page_xml(lines, source, target, db):
     xml_document = XMLDocumentCreate(
         source=source,
         target=target
@@ -253,13 +260,27 @@ def _parse_text_page_xml(lines, source, target):
     db_xml_document = crud.create_xml_document(db, xml_document)
 
     for line in lines:
+        full_match = _lookup_full_tm_match(line, source + '-' + target)
         xml_document_line = XMLDocumentLineCreate(
             text=line,
+            match=full_match,
             document_id=db_xml_document.id
         )
         crud.create_xml_document_line(db, xml_document_line, db_xml_document.id)
 
     return db_xml_document
+
+
+def _update_trans_text_lines_with_matches(translated_lines, db_xml_document: XMLDocument):
+    updated_lines_with_matches = []
+    document_lines = db_xml_document.lines
+    for translation, document_line in zip(translated_lines, document_lines):
+        if document_line.match:
+            updated_lines_with_matches.append(document_line.match)
+        else:
+            updated_lines_with_matches.append(translation)
+
+    return updated_lines_with_matches
 
 
 def _lookup_full_tm_match(segment, langpair):

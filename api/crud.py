@@ -24,7 +24,8 @@ def create_xml_trans(db: Session,
                                    filename=xml_trans.filename,
                                    source=xml_trans.source,
                                    target=xml_trans.target,
-                                   created=datetime.datetime.now()
+                                   created=datetime.datetime.now(),
+                                   xml_document_id=xml_trans.xml_document_id
                                    )
     db.add(db_xml_trans)
     db.commit()
