@@ -70,6 +70,7 @@ class SourceTarget(BaseModel):
 async def translate_page_xml(file: UploadFile = File(...),
                              source: str = Header(...),
                              target: str = Header(...),
+                             use_tm: Optional[bool] = Header(False),
                              db: Session = Depends(get_db),
                              ) -> Response:  # TODO type of response
     """
@@ -85,6 +86,7 @@ async def translate_page_xml(file: UploadFile = File(...),
 
     db_xml_trans = _submit_page_xml_translation(xml, source, target,
                                                 filename=file.filename,
+                                                use_tm=use_tm,
                                                 db=db)
 
     # r = await submit_page_xml_translation(file=file,
@@ -95,7 +97,7 @@ async def translate_page_xml(file: UploadFile = File(...),
     # return r
 
     while True:
-        r = _read_page_xml_translation(db_xml_trans.etranslation_id, target=target, db=db)
+        r = _read_page_xml_translation(db_xml_trans.etranslation_id, target=target, use_tm=use_tm, db=db)
         if r.status_code < 300:
             return r
         else:
@@ -117,6 +119,7 @@ class XMLTransOut(BaseModel):
 async def submit_page_xml_translation(file: UploadFile = File(...),
                                       source: str = Header(...),
                                       target: str = Header(...),
+                                      use_tm: Optional[bool] = Header(False),
                                       db: Session = Depends(get_db)
                                       ) -> Response:  # TODO type of response
     """ Async
@@ -132,6 +135,7 @@ async def submit_page_xml_translation(file: UploadFile = File(...),
 
     db_xml_trans = _submit_page_xml_translation(xml, source=source, target=target,
                                                 filename=file.filename,
+                                                use_tm=use_tm,
                                                 db=db)
 
     return XMLTransOut(id=db_xml_trans.etranslation_id)  # db_xml_trans # Response({'id': id_doc})
@@ -161,8 +165,7 @@ async def read_page_xml_translation(xml_id: str,
     return _read_page_xml_translation(db_xml_trans.etranslation_id, target=db_xml_trans.target, db=db)
 
 
-def _submit_page_xml_translation(xml, source, target, filename,
-                                 db):
+def _submit_page_xml_translation(xml, source, target, filename, use_tm, db):
     # ORM of XML
     # convert file to XLIFF Page.
     # TODO check if XLIFF. If so, no need to convert to XLIFF from Page.
@@ -184,18 +187,19 @@ def _submit_page_xml_translation(xml, source, target, filename,
     # First send trans requests, then request the response.
     lines_text = xml.get_lines_text()
 
-    # Create a XML Document object that holds 100% TM matches
-    db_xml_document = _parse_text_page_xml(lines_text, source, target, db)
-    lines = []
-    for document_line in db_xml_document.lines:
-        # if there's a 100% TM match, don't send the source text to MT, append empty line
-        if document_line.match:
-            lines.append('')
-        else:
-            lines.append(document_line.text)
+    if use_tm:
+        # Create a XML Document object that holds 100% TM matches
+        db_xml_document = _parse_text_page_xml(lines_text, source, target, db)
+        lines_text = []
+        for document_line in db_xml_document.lines:
+            # if there's a 100% TM match, don't send the source text to MT, append empty line
+            if document_line.match:
+                lines_text.append('')
+            else:
+                lines_text.append(document_line.text)
     with tempfile.TemporaryDirectory() as tmp_dir:
         tmp_file = os.path.join(tmp_dir, 'tmp_text_lines.txt')
-        s_tmp = ''.join(text_i + '\n' for text_i in lines)
+        s_tmp = ''.join(text_i + '\n' for text_i in lines_text)
         with open(tmp_file, 'w') as f:
             f.write(s_tmp)
         # send to MT
@@ -206,7 +210,7 @@ def _submit_page_xml_translation(xml, source, target, filename,
                                        filename=filename,
                                        source=source,
                                        target=target,
-                                       xml_document_id=db_xml_document.id)
+                                       xml_document_id=db_xml_document.id if use_tm else -1)
 
     db_xml_trans = crud.create_xml_trans(db=db,
                                          xml_trans=xml_trans,
@@ -215,17 +219,19 @@ def _submit_page_xml_translation(xml, source, target, filename,
     return db_xml_trans
 
 
-def _read_page_xml_translation(xml_id, target, db):
+def _read_page_xml_translation(xml_id, target, use_tm, db):
     # translation
     connector = ETranslationConnector()
 
     r = connector.trans_doc_id(xml_id)
     db_xml_trans = crud.get_xml_by_etranslation_id(db=db,
                                                    etranslation_id=xml_id)
-    db_xml_document = crud.get_document(db=db, document_id=db_xml_trans.xml_document_id)
+    if use_tm:
+        db_xml_document = crud.get_document(db=db, document_id=db_xml_trans.xml_document_id)
     if r:
         l_trans_text = list(map(str.strip, r.get('content').decode('UTF-8').splitlines()))
-        l_trans_text = _update_trans_text_lines_with_matches(l_trans_text, db_xml_document)
+        if use_tm:
+            l_trans_text = _update_trans_text_lines_with_matches(l_trans_text, db_xml_document)
     else:
         content = {'message': 'translation not finished.'}
         return JSONResponse(content, status_code=423)

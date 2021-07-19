@@ -63,7 +63,8 @@ class TestTranslatePageXML(unittest.TestCase):
         with open(path, 'rb') as f:
             files = {'file': f}
             headers = {'source': 'fr',
-                       'target': 'en'}
+                       'target': 'en',
+                       'use-tm': 'True'}
             response = TEST_CLIENT.post("/translate/xml/blocking", files=files, headers=headers)
 
         self.assertLess(response.status_code, 300, "Status code should indicate a proper connection.")

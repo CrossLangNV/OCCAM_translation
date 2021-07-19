@@ -151,7 +151,7 @@
           <Unicode>DAGBLAD VOOR STAATKUNDIGE, MAATSCHAPPELIJKE EN ECONOMISCHE BELANGEN</Unicode>
           <trans-unit id="r003-l004">
             <source xml:lang="nl">DAGBLAD VOOR STAATKUNDIGE, MAATSCHAPPELIJKE EN ECONOMISCHE BELANGEN</source>
-            <target xml:lang="fr">QUOTIDIEN POUR DES INTÉRÊTS POLITIQUES, SOCIAUX ET ÉCONOMIQUES</target>
+            <target xml:lang="fr">REVUE D'INTÉRÊT PUBLIC, SOCIAL ET ÉCONOMIQUE</target>
           </trans-unit>
         </TextEquiv>
       </TextLine>
