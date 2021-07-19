@@ -182,9 +182,11 @@ def _submit_page_xml_translation(xml, source, target, filename,
     # First send trans requests, then request the response.
     lines_text = xml.get_lines_text()
 
+    # Create a XML Document object that holds 100% TM matches
     db_xml_document = _parse_text_page_xml(lines_text, source, target, db)
     lines = []
     for document_line in db_xml_document.lines:
+        # if there's a 100% TM match, don't send the source text to MT, append empty line
         if document_line.match:
             lines.append('')
         else:
@@ -194,6 +196,7 @@ def _submit_page_xml_translation(xml, source, target, filename,
         s_tmp = ''.join(text_i + '\n' for text_i in lines)
         with open(tmp_file, 'w') as f:
             f.write(s_tmp)
+        # send to MT
         id_doc = connector.trans_doc(source, target, tmp_file)
 
     xml_trans = schemas.XMLTransCreate(etranslation_id=id_doc,
