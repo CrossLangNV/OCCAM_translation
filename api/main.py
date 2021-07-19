@@ -1,6 +1,8 @@
 import io
 import os
 import tempfile
+
+from itertools import cycle
 from time import sleep
 from typing import List
 from typing import Optional
@@ -277,7 +279,9 @@ def _parse_text_page_xml(lines, source, target, db):
 def _update_trans_text_lines_with_matches(translated_lines, db_xml_document: XMLDocument):
     updated_lines_with_matches = []
     document_lines = db_xml_document.lines
-    for translation, document_line in zip(translated_lines, document_lines):
+    if len(translated_lines) == 0:
+        translated_lines = ['']
+    for document_line, translation in zip(document_lines, cycle(translated_lines)):
         if document_line.match:
             updated_lines_with_matches.append(document_line.match)
         else:
