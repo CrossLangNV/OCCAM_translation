@@ -1,0 +1,774 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PcGts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15"
+       xsi:schemaLocation="http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15 http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15/pagecontent.xsd">
+    <Metadata>
+        <Creator>prov=University of Rostock/Institute of Mathematics/CITlab|PLANET AI GmbH/Gundram
+            Leifert/gundram.leifert@planet-ai.de:name=Transkribus print 0.3(htr_id=29418)::::v=2.6.7
+            prov=University of Rostock/Institute of Mathematics/CITlab|PLANET AI GmbH/Tobias
+            Gruening/tobias.gruening@planet-ai.de:name=de.uros.citlab.module.baseline2polygon.B2PSeamMultiOriented:v=2.6.7
+            prov=University of Rostock/Institute of Mathematics/CITlab|PLANET AI GmbH/Tobias
+            Gruening/tobias.gruening@planet-ai.de:name=/net_tf/LA73_249_0mod360.pb:de.uros.citlab.segmentation.CITlab_LA_ML:v=2.6.7
+            Transkribus
+        </Creator>
+        <Created>2021-02-10T10:18:50.269+01:00</Created>
+        <LastChange>2021-02-10T10:22:53.331+01:00</LastChange>
+    </Metadata>
+    <Page imageFilename="p001.jpg" imageWidth="2476" imageHeight="3496">
+        <ReadingOrder>
+            <OrderedGroup id="ro_1612948973496" caption="Regions reading order">
+                <RegionRefIndexed index="0" regionRef="r1"/>
+                <RegionRefIndexed index="1" regionRef="r2"/>
+                <RegionRefIndexed index="2" regionRef="r3"/>
+            </OrderedGroup>
+        </ReadingOrder>
+        <TextRegion orientation="0.0" id="r1" custom="readingOrder {index:0;}">
+            <Coords points="39,0 39,124 84,124 84,0"/>
+            <TextLine id="r1l1" custom="readingOrder {index:0;}">
+                <Coords points="28,83 59,85 72,83 77,78 97,75 92,25 23,35"/>
+                <Baseline points="39,74 84,69"/>
+                <TextEquiv>
+                    <Unicode></Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextEquiv>
+                <Unicode></Unicode>
+            </TextEquiv>
+        </TextRegion>
+        <TextRegion orientation="0.0" id="r2" custom="readingOrder {index:1;}">
+            <Coords points="153,99 153,598 384,598 384,99"/>
+            <TextLine id="r2l1" custom="readingOrder {index:0;}">
+                <Coords points="152,133 215,125 280,141 292,129 308,134 329,124 397,149 396,63 152,70"/>
+                <Baseline points="165,123 192,121 219,120 247,119 274,119 301,119 329,119 356,119 384,120"/>
+                <TextEquiv>
+                    <Unicode></Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r2l2" custom="readingOrder {index:1;}">
+                <Coords points="148,172 217,165 231,169 250,187 262,186 260,135 246,136 232,124 211,125 207,130 174,129 167,136 146,134"/>
+                <Baseline points="159,162 189,157 219,156 249,159"/>
+                <TextEquiv>
+                    <Unicode></Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r2l3" custom="readingOrder {index:2;}">
+                <Coords points="197,297 220,299 234,290 255,292 273,282 283,287 296,286 295,191 263,199 232,169 195,169"/>
+                <Baseline points="207,276 233,269 259,271 285,273"/>
+                <TextEquiv>
+                    <Unicode>)</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r2l4" custom="readingOrder {index:3;}">
+                <Coords points="141,329 236,329 255,345 283,345 299,344 318,326 394,325 394,267 378,267 359,286 329,293 290,293 278,282 255,294 194,292 164,266 141,271"/>
+                <Baseline points="153,311 178,313 204,314 229,315 255,315 280,314 306,314 331,312 357,312 383,312"/>
+                <TextEquiv>
+                    <Unicode></Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r2l5" custom="readingOrder {index:4;}">
+                <Coords points="248,439 262,439 269,444 278,444 283,439 290,439 292,442 297,439 313,442 329,440 330,396 319,396 307,407 291,407 284,400 270,397 249,397"/>
+                <Baseline points="261,428 289,432 318,429"/>
+                <TextEquiv>
+                    <Unicode>Voor</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r2l6" custom="readingOrder {index:5;}">
+                <Coords points="201,486 229,486 238,479 296,486 303,479 324,478 324,441 270,444 266,439 249,439 240,447 233,447 221,437 201,438"/>
+                <Baseline points="213,468 246,471 279,470 312,468"/>
+                <TextEquiv>
+                    <Unicode>behout</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r2l7" custom="readingOrder {index:6;}">
+                <Coords points="219,518 261,519 300,513 302,516 323,515 322,478 269,479 264,484 250,482 230,490 218,490"/>
+                <Baseline points="230,507 257,509 284,506 311,507"/>
+                <TextEquiv>
+                    <Unicode>aan h</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r2l8" custom="readingOrder {index:7;}">
+                <Coords points="208,552 231,554 235,559 240,554 270,557 275,562 324,557 324,518 308,515 287,522 282,518 254,520 252,517 250,520 233,513 208,512"/>
+                <Baseline points="219,546 250,545 281,546 312,546"/>
+                <TextEquiv>
+                    <Unicode>Belgis</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r2l9" custom="readingOrder {index:8;}">
+                <Coords points="201,599 335,597 335,555 298,556 284,547 260,559 200,553"/>
+                <Baseline points="213,585 240,588 268,588 295,587 323,584"/>
+                <TextEquiv>
+                    <Unicode>Staatst</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextEquiv>
+                <Unicode>
+
+                    )
+
+                    Voor
+                    behout
+                    aan h
+                    Belgis
+                    Staatst
+                </Unicode>
+            </TextEquiv>
+        </TextRegion>
+        <TextRegion orientation="0.0" id="r3" custom="readingOrder {index:2;}">
+            <Coords points="195,129 195,3357 2310,3357 2310,129"/>
+            <TextLine id="r3l1" custom="readingOrder {index:0;}">
+                <Coords points="2104,165 2160,174 2174,166 2190,173 2197,166 2283,165 2302,158 2301,125 2104,133"/>
+                <Baseline points="2115,156 2144,156 2173,156 2202,156 2231,156 2260,155 2289,152"/>
+                <TextEquiv>
+                    <Unicode>Mod DOC 19.01</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l2" custom="readingOrder {index:1;}">
+                <Coords points="873,254 2311,251 2269,192 873,200"/>
+                <Baseline
+                        points="884,239 954,237 1025,237 1096,237 1166,237 1237,237 1308,236 1378,236 1449,236 1520,236 1591,236 1661,236 1732,236 1803,237 1873,237 1944,237 2015,237 2085,237 2156,239 2227,239 2298,239"/>
+                <TextEquiv>
+                    <Unicode>In de bijlagen bij het Belgisch Staatsblad bekend te maken kopie</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l3" custom="readingOrder {index:2;}">
+                <Coords points="876,309 1589,318 1702,307 1702,261 875,263"/>
+                <Baseline
+                        points="887,294 927,296 967,296 1007,296 1047,297 1088,297 1128,296 1168,296 1208,296 1248,296 1289,294 1329,294 1369,294 1409,293 1449,293 1490,293 1530,291 1570,291 1610,291 1650,291 1691,293"/>
+                <TextEquiv>
+                    <Unicode>na neerlegging van de akte ter griffie</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l4" custom="readingOrder {index:3;}">
+                <Coords points="1492,422 2047,423 2048,379 1492,380"/>
+                <Baseline
+                        points="1505,411 1531,411 1558,411 1584,411 1611,411 1637,411 1664,411 1690,411 1717,411 1743,411 1770,411 1797,411 1823,411 1850,411 1876,411 1903,411 1929,411 1956,411 1982,413 2009,413 2036,413"/>
+                <TextEquiv>
+                    <Unicode>NEERLEGGING TER GRIFFIE VAN DE</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l5" custom="readingOrder {index:4;}">
+                <Coords points="1492,454 2045,459 2045,422 1493,430"/>
+                <Baseline
+                        points="1505,449 1531,449 1557,449 1584,447 1610,447 1637,447 1663,446 1689,446 1716,446 1742,446 1769,446 1795,446 1821,447 1848,447 1874,447 1901,447 1927,448 1953,449 1980,449 2006,449 2033,450"/>
+                <TextEquiv>
+                    <Unicode>ONDERNEMINGSRECHTBANK GENT</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l6" custom="readingOrder {index:5;}">
+                <Coords points="1634,492 1741,493 1748,500 1774,493 1913,495 1914,455 1765,461 1635,454"/>
+                <Baseline
+                        points="1647,482 1672,483 1698,483 1723,483 1749,483 1774,483 1800,483 1825,484 1851,485 1876,485 1902,485"/>
+                <TextEquiv>
+                    <Unicode>afdeling BRUGGE</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l7" custom="readingOrder {index:6;}">
+                <Coords points="1599,566 1623,580 1697,583 1710,598 1787,597 1804,586 1817,597 1901,606 1917,602 1923,526 1825,528 1805,545 1790,529 1708,535 1689,512 1603,510"/>
+                <Baseline
+                        points="1611,566 1638,568 1665,569 1692,572 1719,576 1746,579 1773,581 1800,584 1827,585 1854,587 1881,585 1908,584"/>
+                <TextEquiv>
+                    <Unicode>3 1 J011 2020</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l8" custom="readingOrder {index:7;}">
+                <Coords points="972,603 1035,603 1039,552 1022,553 1018,548 1008,555 989,532 978,531"/>
+                <Baseline points="984,590 1023,593"/>
+                <TextEquiv>
+                    <Unicode></Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l9" custom="readingOrder {index:8;}">
+                <Coords points="546,598 583,603 602,594 627,602 644,593 662,603 688,599 691,464 549,466"/>
+                <Baseline points="557,590 587,591 617,591 647,592 677,593"/>
+                <TextEquiv>
+                    <Unicode></Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l10" custom="readingOrder {index:9;}">
+                <Coords points="528,643 581,663 902,663 962,641 963,599 854,595 835,609 805,594 782,606 770,594 663,604 529,590"/>
+                <Baseline
+                        points="540,627 565,631 591,635 617,638 642,641 668,644 694,645 719,647 745,648 771,648 796,648 822,647 848,645 873,643 899,640 925,637 951,633"/>
+                <TextEquiv>
+                    <Unicode>*20091542*</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l11" custom="readingOrder {index:10;}">
+                <Coords points="1763,676 1902,675 1902,631 1878,631 1871,624 1762,625"/>
+                <Baseline points="1773,662 1802,664 1831,665 1860,663 1890,662"/>
+                <TextEquiv>
+                    <Unicode>Griffie</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l12" custom="readingOrder {index:11;}">
+                <Coords points="586,801 846,812 934,789 951,805 1211,805 1211,749 586,759"/>
+                <Baseline
+                        points="597,791 627,791 657,792 687,792 717,792 747,792 777,792 808,792 838,792 868,792 898,792 928,792 958,792 988,792 1019,792 1049,792 1079,792 1109,791 1139,791 1169,791 1200,791"/>
+                <TextEquiv>
+                    <Unicode>Ondernemingshr: 0833 057 774</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l13" custom="readingOrder {index:12;}">
+                <Coords points="773,852 901,853 901,809 857,809 834,815 811,801 774,803"/>
+                <Baseline points="785,837 811,840 837,840 863,839 890,840"/>
+                <TextEquiv>
+                    <Unicode>Naam</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l14" custom="readingOrder {index:13;}">
+                <Coords points="783,917 895,915 929,901 1227,908 1241,905 1241,861 1169,850 1050,866 953,847 906,873 783,868"/>
+                <Baseline
+                        points="795,897 820,896 846,896 871,896 897,896 922,896 948,896 973,896 999,896 1024,896 1050,896 1075,896 1101,896 1126,896 1152,896 1177,896 1203,896 1229,896"/>
+                <TextEquiv>
+                    <Unicode>(voluit): k&amp;c snacks</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l15" custom="readingOrder {index:14;}">
+                <Coords points="772,974 793,974 807,962 842,963 856,970 919,972 919,925 902,921 856,925 772,921"/>
+                <Baseline points="783,954 808,953 833,954 858,954 883,954 908,953"/>
+                <TextEquiv>
+                    <Unicode>(verkort)</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l16" custom="readingOrder {index:15;}">
+                <Coords points="675,1043 1418,1052 1418,992 675,994"/>
+                <Baseline
+                        points="686,1029 722,1029 758,1029 794,1031 830,1031 866,1031 902,1031 938,1031 974,1031 1010,1031 1046,1031 1082,1031 1118,1031 1154,1031 1190,1031 1226,1032 1262,1032 1298,1032 1334,1032 1370,1032 1406,1032"/>
+                <TextEquiv>
+                    <Unicode>Rechtsvorm: besloten vennootschap</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l17" custom="readingOrder {index:16;}">
+                <Coords points="455,1118 1707,1116 1707,1069 1654,1065 456,1069"/>
+                <Baseline
+                        points="468,1103 529,1103 590,1103 652,1103 713,1104 774,1104 836,1104 897,1104 958,1104 1020,1106 1081,1106 1142,1106 1204,1106 1265,1106 1326,1106 1388,1106 1449,1106 1510,1106 1572,1104 1633,1104 1695,1103"/>
+                <TextEquiv>
+                    <Unicode>Volledig adres v.d. zetel : meerlaan 71 bus 1, 8300 knokke-heist</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l18" custom="readingOrder {index:17;}">
+                <Coords points="434,1246 1582,1245 1582,1185 434,1183"/>
+                <Baseline
+                        points="446,1218 502,1218 558,1218 614,1218 671,1220 727,1220 783,1220 839,1220 896,1220 952,1220 1008,1220 1064,1220 1121,1220 1177,1221 1233,1221 1289,1221 1346,1220 1402,1220 1458,1220 1514,1220 1571,1220"/>
+                <TextEquiv>
+                    <Unicode>Onderwerp akte : BAV ontbinding en sluiting vereffening</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l19" custom="readingOrder {index:18;}">
+                <Coords points="494,1301 2312,1302 2289,1258 494,1257"/>
+                <Baseline
+                        points="506,1290 595,1289 685,1289 775,1289 864,1289 954,1289 1044,1287 1133,1287 1223,1287 1313,1289 1403,1289 1492,1289 1582,1289 1672,1289 1761,1289 1851,1289 1941,1289 2030,1289 2120,1290 2210,1290 2300,1290"/>
+                <TextEquiv>
+                    <Unicode>Er blijkt uit de notulen op zevenentwintig juli tweeduizendtwintig opgesteid door notaris
+                        Eric Deroose te
+                    </Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l20" custom="readingOrder {index:19;}">
+                <Coords points="438,1349 2006,1349 2006,1303 438,1298"/>
+                <Baseline
+                        points="449,1332 526,1334 603,1334 680,1334 758,1334 835,1334 912,1334 990,1334 1067,1334 1144,1332 1222,1332 1299,1332 1376,1332 1453,1332 1531,1332 1608,1332 1685,1332 1763,1332 1840,1332 1917,1334 1995,1334"/>
+                <TextEquiv>
+                    <Unicode>Kniokke-Heist, dat de vergadering der aandeelhouders volgende beslissingen heeft genomen:
+                    </Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l21" custom="readingOrder {index:20;}">
+                <Coords points="506,1440 889,1444 890,1389 506,1389"/>
+                <Baseline
+                        points="519,1422 544,1422 570,1422 596,1422 621,1422 647,1422 673,1422 699,1422 724,1422 750,1422 776,1422 801,1422 827,1424 853,1424 879,1424"/>
+                <TextEquiv>
+                    <Unicode>EERSTE BESLISSING</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l22" custom="readingOrder {index:21;}">
+                <Coords points="507,1487 581,1494 679,1492 680,1450 631,1449 587,1440 557,1451 538,1443 508,1442"/>
+                <Baseline points="518,1473 543,1472 568,1472 593,1473 618,1474 643,1476 668,1476"/>
+                <TextEquiv>
+                    <Unicode>Verslagen</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l23" custom="readingOrder {index:22;}">
+                <Coords points="494,1531 2166,1541 2312,1532 2312,1485 494,1489"/>
+                <Baseline
+                        points="506,1518 595,1520 685,1520 775,1520 864,1520 954,1520 1044,1520 1133,1520 1223,1520 1313,1520 1403,1520 1492,1520 1582,1520 1672,1520 1761,1520 1851,1520 1941,1520 2030,1520 2120,1521 2210,1521 2300,1521"/>
+                <TextEquiv>
+                    <Unicode>Bij eenparigheid ontslaat de algemene vergadering de voorzitter lezing te geven van het
+                        verslag van het
+                    </Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l24" custom="readingOrder {index:23;}">
+                <Coords points="440,1575 2309,1582 2286,1531 440,1533"/>
+                <Baseline
+                        points="452,1563 544,1563 636,1563 728,1562 821,1562 913,1562 1005,1562 1097,1562 1190,1560 1282,1560 1374,1560 1466,1562 1559,1562 1651,1562 1743,1562 1835,1562 1928,1563 2020,1563 2112,1565 2204,1565 2297,1566"/>
+                <TextEquiv>
+                    <Unicode>bestuursorgaan, opgesteld overeenkomstig artikel 2:71 Wetboek Vennootschappen en
+                        Verenigingen en van de
+                    </Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l25" custom="readingOrder {index:24;}">
+                <Coords points="441,1622 2296,1628 2269,1576 441,1575"/>
+                <Baseline
+                        points="452,1605 543,1605 635,1605 726,1605 818,1605 910,1605 1001,1605 1093,1605 1185,1605 1276,1605 1368,1605 1460,1605 1551,1605 1643,1605 1735,1605 1826,1607 1918,1607 2010,1607 2101,1608 2193,1608 2285,1610"/>
+                <TextEquiv>
+                    <Unicode>bijgevoegde staat, alsook van het verslag van de bedrijfsrevisor betreffende de staat
+                        gevoegd bij het verslag
+                    </Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l26" custom="readingOrder {index:25;}">
+                <Coords points="445,1662 798,1662 798,1627 744,1620 445,1627"/>
+                <Baseline
+                        points="456,1649 481,1650 506,1650 532,1650 557,1650 582,1649 608,1649 633,1649 659,1649 684,1649 709,1649 735,1650 760,1651 786,1652"/>
+                <TextEquiv>
+                    <Unicode>van de zaakvoerders</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l27" custom="readingOrder {index:26;}">
+                <Coords points="496,1710 2305,1708 2289,1666 496,1665"/>
+                <Baseline
+                        points="507,1695 596,1697 685,1697 775,1697 864,1697 953,1697 1043,1697 1132,1697 1221,1697 1311,1697 1400,1697 1489,1695 1579,1695 1668,1695 1757,1697 1847,1697 1936,1697 2025,1697 2115,1698 2204,1698 2294,1700"/>
+                <TextEquiv>
+                    <Unicode>Het verslag van de bedrijfsrevisor Certam Bedrijfsrevisoren te 8560 Wevelgem,
+                        Kortrijkstraat 145 voor wie
+                    </Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l28" custom="readingOrder {index:27;}">
+                <Coords points="440,1758 1624,1764 1673,1757 1673,1711 440,1712"/>
+                <Baseline
+                        points="452,1739 512,1739 572,1739 633,1739 693,1739 754,1739 814,1739 875,1739 935,1739 996,1739 1056,1739 1116,1739 1177,1739 1237,1740 1298,1740 1358,1740 1419,1740 1479,1740 1540,1740 1600,1739 1661,1739"/>
+                <TextEquiv>
+                    <Unicode>optreedt de Heer Kristof Planquette, besluit in de volgende bewoordingen¬</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l29" custom="readingOrder {index:28;}">
+                <Coords points="509,1800 687,1806 689,1755 510,1752"/>
+                <Baseline points="521,1784 547,1782 573,1782 599,1783 625,1785 651,1786 677,1788"/>
+                <TextEquiv>
+                    <Unicode>BESLUIT</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l30" custom="readingOrder {index:29;}">
+                <Coords points="504,1847 2304,1845 2229,1801 504,1803"/>
+                <Baseline
+                        points="516,1832 604,1832 693,1833 782,1833 871,1833 960,1835 1048,1835 1137,1835 1226,1835 1315,1835 1404,1835 1492,1835 1581,1835 1670,1835 1759,1835 1848,1835 1936,1835 2025,1835 2114,1835 2203,1835 2292,1835"/>
+                <TextEquiv>
+                    <Unicode>Overeenkomstig artikel 2:71 en 2:80 van het Wetboek van vennootschappen en verenigirigen
+                        brengen wij aan
+                    </Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l31" custom="readingOrder {index:30;}">
+                <Coords points="440,1888 2312,1894 2298,1848 440,1849"/>
+                <Baseline
+                        points="452,1877 544,1877 636,1877 729,1877 821,1877 914,1878 1006,1878 1099,1878 1191,1878 1284,1878 1376,1878 1468,1878 1561,1878 1653,1878 1746,1878 1838,1878 1931,1878 2023,1878 2116,1878 2208,1878 2301,1878"/>
+                <TextEquiv>
+                    <Unicode>de buiten-gewone algemene vergadering verslag uit in het kader van onze opdracht als
+                        bedrijfsrevisor waarvoor
+                    </Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l32" custom="readingOrder {index:31;}">
+                <Coords points="434,1930 1923,1932 1923,1897 1658,1888 434,1897"/>
+                <Baseline
+                        points="446,1920 519,1920 592,1920 665,1920 739,1920 812,1920 885,1920 958,1920 1032,1920 1105,1920 1178,1920 1251,1920 1325,1920 1398,1920 1471,1920 1544,1920 1618,1920 1691,1920 1764,1920 1837,1920 1911,1920"/>
+                <TextEquiv>
+                    <Unicode>wij aangesteld zijn blijkens opdrachtbrief van 19 mei 2020 vanwege het bestuursorgaan.
+                    </Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l33" custom="readingOrder {index:32;}">
+                <Coords points="501,1979 2113,1989 2312,1980 2313,1938 501,1937"/>
+                <Baseline
+                        points="512,1967 601,1967 690,1967 780,1968 869,1968 959,1968 1048,1968 1138,1968 1227,1968 1317,1968 1406,1968 1495,1968 1585,1968 1674,1968 1764,1968 1853,1968 1943,1968 2032,1968 2122,1968 2211,1968 2301,1968"/>
+                <TextEquiv>
+                    <Unicode>In het kader van deze procedure tot ontbinding heeft het bestuursorgaan vani de
+                        vennootschap BV K &amp; C
+                    </Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l34" custom="readingOrder {index:33;}">
+                <Coords points="435,2023 2302,2027 2235,1976 435,1977"/>
+                <Baseline
+                        points="446,2009 538,2010 630,2010 722,2012 815,2012 907,2012 999,2012 1091,2012 1184,2013 1276,2013 1368,2013 1460,2013 1553,2013 1645,2013 1737,2012 1829,2012 1922,2012 2014,2012 2106,2012 2198,2012 2291,2013"/>
+                <TextEquiv>
+                    <Unicode>SNACKS een boekhoudkundige staat afgesloten op 19 mei 2020 die, rekeriing houdend met de
+                        vooruitzichten
+                    </Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l35" custom="readingOrder {index:34;}">
+                <Coords points="444,2070 2311,2069 2246,2023 444,2023"/>
+                <Baseline
+                        points="455,2052 547,2052 639,2054 731,2054 824,2054 916,2055 1008,2055 1100,2055 1193,2055 1285,2055 1377,2055 1469,2055 1562,2055 1654,2055 1746,2055 1838,2055 1931,2055 2023,2055 2115,2055 2207,2055 2300,2054"/>
+                <TextEquiv>
+                    <Unicode>van de vereffening van de vennootschap, een balanstotaat opgeeft van 23,48 EUR en een
+                        nettopassief ten belope
+                    </Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l36" custom="readingOrder {index:35;}">
+                <Coords points="444,2117 776,2115 776,2068 444,2070"/>
+                <Baseline
+                        points="456,2096 481,2097 507,2097 533,2097 559,2096 584,2096 610,2096 636,2096 662,2096 687,2096 713,2096 739,2098 765,2099"/>
+                <TextEquiv>
+                    <Unicode>van 10.119,64 EUR</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l37" custom="readingOrder {index:36;}">
+                <Coords points="503,2165 2308,2156 2308,2114 503,2112"/>
+                <Baseline
+                        points="515,2144 604,2145 693,2145 782,2145 871,2145 960,2145 1049,2145 1138,2145 1227,2147 1316,2147 1406,2147 1495,2147 1584,2147 1673,2147 1762,2147 1851,2147 1940,2147 2029,2147 2118,2147 2207,2146 2297,2145"/>
+                <TextEquiv>
+                    <Unicode>Wij hebben de controle uitgevoerd van deze staat van de vennootschap opgesteld op grond van
+                        het in Belgié
+                    </Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l38" custom="readingOrder {index:37;}">
+                <Coords points="441,2205 1374,2203 1398,2159 441,2160"/>
+                <Baseline
+                        points="453,2189 499,2189 546,2189 592,2189 639,2189 686,2189 732,2190 779,2190 826,2190 872,2190 919,2190 966,2190 1012,2190 1059,2190 1106,2190 1152,2190 1199,2190 1246,2190 1292,2190 1339,2190 1386,2190"/>
+                <TextEquiv>
+                    <Unicode>van toepas-sing zijnde boekhoudkundig referentiestelsel.</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l39" custom="readingOrder {index:38;}">
+                <Coords points="494,2246 2308,2253 2308,2200 494,2202"/>
+                <Baseline
+                        points="506,2234 595,2235 685,2235 774,2237 864,2237 953,2237 1043,2237 1132,2237 1222,2237 1311,2237 1401,2237 1491,2237 1580,2237 1670,2235 1759,2235 1849,2235 1938,2235 2028,2236 2117,2237 2207,2237 2297,2238"/>
+                <TextEquiv>
+                    <Unicode>Verantwoordelijkheid van het bestuursorgaan voor het opstellen van de staat van activa en
+                        passiva per 19
+                    </Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l40" custom="readingOrder {index:39;}">
+                <Coords points="435,2292 609,2293 610,2248 436,2250"/>
+                <Baseline points="447,2279 472,2280 497,2279 523,2279 548,2280 573,2281 599,2283"/>
+                <TextEquiv>
+                    <Unicode>mei 2020.</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l41" custom="readingOrder {index:40;}">
+                <Coords points="501,2340 2301,2341 2301,2295 501,2296"/>
+                <Baseline
+                        points="512,2327 600,2327 689,2327 778,2327 867,2327 956,2327 1045,2327 1133,2327 1222,2327 1311,2327 1400,2327 1489,2325 1578,2325 1667,2325 1755,2325 1844,2325 1933,2324 2022,2324 2111,2325 2200,2325 2289,2325"/>
+                <TextEquiv>
+                    <Unicode>Het bestuursorgaan is verantwoordelijk voor het opsteilen van de staat van actief en
+                        passief per 19 mei 2020
+                    </Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l42" custom="readingOrder {index:41;}">
+                <Coords points="444,2382 2314,2382 2277,2338 444,2336"/>
+                <Baseline
+                        points="455,2367 547,2369 639,2369 732,2370 824,2370 917,2370 1009,2370 1101,2370 1194,2370 1286,2369 1379,2369 1471,2369 1563,2367 1656,2367 1748,2367 1841,2367 1933,2367 2025,2367 2118,2367 2210,2369 2303,2370"/>
+                <TextEquiv>
+                    <Unicode>De boek-houdkundige staat moet getrouw zijn aan de werkelijkheid. Dat betekent dat de
+                        waarderingen te goeder
+                    </Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l43" custom="readingOrder {index:42;}">
+                <Coords points="437,2429 2309,2429 2309,2380 437,2382"/>
+                <Baseline
+                        points="449,2411 541,2412 633,2412 726,2412 818,2412 911,2412 1003,2412 1095,2412 1188,2411 1280,2411 1373,2411 1465,2411 1557,2409 1650,2409 1742,2409 1835,2409 1927,2409 2019,2410 2112,2411 2204,2412 2297,2412"/>
+                <TextEquiv>
+                    <Unicode>trouw moeten worden verricht en dat het bestuursorgaan indien nodig, de boekhoudkundige
+                        staat moet
+                    </Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l44" custom="readingOrder {index:43;}">
+                <Coords points="438,2464 2231,2474 2217,2423 438,2432"/>
+                <Baseline
+                        points="449,2454 537,2456 626,2456 714,2456 803,2456 891,2456 980,2456 1068,2456 1157,2456 1245,2456 1334,2456 1423,2456 1511,2456 1600,2456 1688,2456 1777,2456 1865,2456 1954,2456 2042,2456 2131,2457 2220,2457"/>
+                <TextEquiv>
+                    <Unicode>vervolledigen met een verkla-rende bijlage over de keuze die het heeft gemaakt op het viak
+                        van waardering
+                    </Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l45" custom="readingOrder {index:44;}">
+                <Coords points="504,2518 1215,2518 1229,2471 504,2473"/>
+                <Baseline
+                        points="516,2504 551,2504 586,2504 621,2504 656,2504 691,2504 726,2504 761,2504 796,2504 831,2504 867,2504 902,2504 937,2504 972,2504 1007,2504 1042,2504 1077,2504 1112,2504 1147,2504 1182,2504 1218,2504"/>
+                <TextEquiv>
+                    <Unicode>Verantwoordelijkheid van de bedrijfsrevisor</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l46" custom="readingOrder {index:45;}">
+                <Coords points="495,2564 2121,2569 2316,2564 2316,2518 495,2519"/>
+                <Baseline
+                        points="507,2550 596,2550 686,2552 776,2552 866,2552 956,2552 1046,2552 1135,2552 1225,2552 1315,2552 1405,2550 1495,2550 1585,2550 1675,2550 1764,2550 1854,2550 1944,2550 2034,2550 2124,2550 2214,2550 2304,2552"/>
+                <TextEquiv>
+                    <Unicode>De bedrijfsrevisor zal een gepaste beschrifving geven van de betekenisvolle posten van
+                        activa en passiva met
+                    </Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l47" custom="readingOrder {index:46;}">
+                <Coords points="441,2608 2162,2606 2102,2562 441,2564"/>
+                <Baseline
+                        points="453,2594 537,2594 622,2594 707,2595 792,2595 877,2595 962,2595 1047,2595 1132,2594 1217,2594 1302,2594 1386,2594 1471,2594 1556,2594 1641,2594 1726,2592 1811,2592 1896,2594 1981,2594 2066,2594 2151,2594"/>
+                <TextEquiv>
+                    <Unicode>bijzondere aandacht voor de waarderingsregels en voor de voornaamste uitgevoerde
+                        werkzaamheden.
+                    </Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l48" custom="readingOrder {index:47;}">
+                <Coords points="503,2653 2309,2651 2289,2607 503,2608"/>
+                <Baseline
+                        points="515,2640 604,2640 693,2640 782,2642 871,2642 960,2642 1049,2642 1139,2642 1228,2642 1317,2642 1406,2642 1495,2642 1584,2642 1673,2642 1763,2642 1852,2642 1941,2640 2030,2642 2119,2642 2208,2642 2298,2642"/>
+                <TextEquiv>
+                    <Unicode>Het is onze verantwoordelijkheid verslag uit te brengen over de getrouwheid van de staat
+                        van actief en passief.
+                    </Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l49" custom="readingOrder {index:48;}">
+                <Coords points="501,2703 929,2700 928,2653 905,2663 501,2656"/>
+                <Baseline
+                        points="512,2687 537,2687 562,2687 588,2687 613,2687 638,2687 664,2687 689,2685 715,2685 740,2685 765,2685 791,2685 816,2685 841,2687 867,2687 892,2687 918,2688"/>
+                <TextEquiv>
+                    <Unicode>Oordeel met voorbehoud</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l50" custom="readingOrder {index:49;}">
+                <Coords points="506,2750 2095,2756 2309,2747 2309,2703 506,2704"/>
+                <Baseline
+                        points="519,2732 612,2733 706,2733 799,2735 893,2735 987,2735 1080,2735 1174,2735 1268,2735 1361,2735 1455,2735 1548,2735 1642,2735 1736,2735 1829,2735 1923,2735 2017,2735 2110,2735 2204,2735 2298,2735"/>
+                <TextEquiv>
+                    <Unicode>Uit de controlewerkzaamheden, die wij hebben uitgevoerd overeenkomstig de toepasselijke
+                        professionele
+                    </Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l51" custom="readingOrder {index:50;}">
+                <Coords points="443,2796 2206,2797 2313,2750 443,2752"/>
+                <Baseline
+                        points="455,2780 547,2780 639,2778 731,2778 824,2778 916,2778 1008,2778 1101,2778 1193,2778 1285,2778 1378,2777 1470,2777 1562,2777 1654,2777 1747,2777 1839,2777 1931,2777 2024,2778 2116,2778 2208,2778 2301,2778"/>
+                <TextEquiv>
+                    <Unicode>normen, blijkt, onder voorbehoud van de eventuele impact van een herziening van de
+                        resultaten ten gevolge van
+                    </Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l52" custom="readingOrder {index:51;}">
+                <Coords points="453,2836 2322,2836 2244,2785 453,2794"/>
+                <Baseline
+                        points="464,2822 556,2822 648,2822 740,2822 833,2822 925,2822 1017,2822 1110,2822 1202,2822 1294,2822 1387,2822 1479,2822 1571,2822 1663,2822 1756,2822 1848,2822 1940,2822 2033,2822 2125,2822 2217,2822 2310,2822"/>
+                <TextEquiv>
+                    <Unicode>een controle van de belastingsdiensten met betrekking tot jaren die nog niet gecontroleerd
+                        werden, dat de
+                    </Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l53" custom="readingOrder {index:52;}">
+                <Coords points="446,2878 1838,2877 1838,2842 1573,2833 446,2836"/>
+                <Baseline
+                        points="458,2864 526,2864 594,2864 663,2865 731,2865 800,2865 868,2865 936,2865 1005,2865 1073,2865 1142,2865 1210,2865 1278,2865 1347,2865 1415,2865 1484,2865 1552,2865 1620,2864 1689,2864 1757,2864 1826,2864"/>
+                <TextEquiv>
+                    <Unicode>toestand van de vennootschap per 19 mei 2020 op getrouwe wijze is weergegeven.</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l54" custom="readingOrder {index:53;}">
+                <Coords points="506,2924 2315,2932 2285,2881 506,2880"/>
+                <Baseline
+                        points="518,2913 607,2913 696,2913 785,2913 875,2913 964,2913 1053,2913 1143,2913 1232,2913 1321,2913 1411,2913 1500,2913 1589,2913 1678,2913 1768,2912 1857,2912 1946,2912 2036,2912 2125,2912 2214,2912 2304,2912"/>
+                <TextEquiv>
+                    <Unicode>Alle schulden ten aanzien van aandeelhouders en derden op datum van ondertekening van dit
+                        controleverstag
+                    </Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l55" custom="readingOrder {index:54;}">
+                <Coords points="444,2970 2316,2966 2239,2924 444,2928"/>
+                <Baseline
+                        points="455,2955 547,2957 639,2957 732,2957 824,2957 917,2957 1009,2957 1102,2957 1194,2957 1287,2957 1379,2957 1471,2957 1564,2957 1656,2955 1749,2955 1841,2955 1934,2955 2026,2955 2119,2955 2211,2957 2304,2957"/>
+                <TextEquiv>
+                    <Unicode>werden betaald, hetzij werd de schriftelijke bevestigirig bekomen van de schuldeisers
+                        conform artikel 2:80 van
+                    </Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l56" custom="readingOrder {index:55;}">
+                <Coords points="438,3012 2203,3016 2312,3011 2312,2967 438,2968"/>
+                <Baseline
+                        points="450,2999 542,2999 635,2999 727,2999 820,2999 912,2999 1005,2999 1097,2999 1190,2999 1282,2999 1375,2999 1467,2999 1560,2999 1652,2999 1745,2999 1837,2999 1930,2999 2022,3000 2115,3000 2207,3000 2300,3000"/>
+                <TextEquiv>
+                    <Unicode>het Wetboek van vennootschappen en verenigingen, meer bepaald met het feit dat deze schuld,
+                        zoals
+                    </Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l57" custom="readingOrder {index:56;}">
+                <Coords points="448,3063 2311,3060 2311,3011 448,3019"/>
+                <Baseline
+                        points="461,3045 557,3044 654,3044 751,3044 848,3044 944,3044 1041,3044 1138,3042 1235,3042 1332,3042 1428,3042 1525,3042 1622,3042 1719,3042 1816,3042 1912,3042 2009,3042 2106,3042 2203,3042 2300,3042"/>
+                <TextEquiv>
+                    <Unicode>opgenomen in de staat van activa en passiva bedoeld in artikel 2:71 § 2, tweede lid op
+                        heden niet werd betaald,
+                    </Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l58" custom="readingOrder {index:57;}">
+                <Coords points="439,3099 773,3102 801,3097 801,3055 439,3057"/>
+                <Baseline
+                        points="450,3086 476,3086 502,3087 528,3087 554,3086 580,3086 606,3086 632,3086 658,3086 684,3086 710,3086 736,3086 762,3087 789,3089"/>
+                <TextEquiv>
+                    <Unicode>noch geconsigneerd.</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l59" custom="readingOrder {index:58;}">
+                <Coords points="501,3146 2232,3153 2315,3144 2315,3095 501,3098"/>
+                <Baseline
+                        points="513,3132 602,3134 692,3134 781,3134 871,3134 960,3134 1050,3134 1139,3134 1229,3134 1318,3134 1408,3134 1498,3134 1587,3134 1677,3132 1766,3132 1856,3132 1945,3132 2035,3132 2124,3132 2214,3132 2304,3132"/>
+                <TextEquiv>
+                    <Unicode>Gelet op voormeld nettopassief enerzijds en de som van de fiscaal voistorte inbreng zal
+                        naar aanleiding van
+                    </Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l60" custom="readingOrder {index:59;}">
+                <Coords points="439,3189 2019,3195 2321,3188 2321,3147 439,3152"/>
+                <Baseline
+                        points="452,3179 544,3177 637,3177 730,3177 823,3177 916,3177 1009,3177 1101,3177 1194,3177 1287,3177 1380,3177 1473,3177 1566,3177 1659,3177 1751,3177 1844,3177 1937,3177 2030,3177 2123,3177 2216,3177 2309,3177"/>
+                <TextEquiv>
+                    <Unicode>onderhavig ontbinding en vereffening geen roerende voorheffing verschuldigd zijn. Rekening
+                        houdend met het
+                    </Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l61" custom="readingOrder {index:60;}">
+                <Coords points="959,3271 2123,3279 2123,3216 959,3215"/>
+                <Baseline
+                        points="971,3257 1028,3257 1085,3257 1142,3257 1199,3258 1256,3258 1313,3258 1370,3258 1427,3258 1484,3258 1541,3258 1598,3258 1655,3258 1712,3258 1769,3258 1826,3258 1883,3258 1940,3258 1997,3258 2054,3258 2111,3258"/>
+                <TextEquiv>
+                    <Unicode>Naam en hoedanigheid van de instrumenterende notaris, hetzij van de perso(ojnten)</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l62" custom="readingOrder {index:61;}">
+                <Coords points="184,3279 748,3260 913,3276 922,3234 183,3232"/>
+                <Baseline
+                        points="195,3261 230,3260 266,3260 302,3260 338,3260 374,3260 409,3260 445,3258 481,3258 517,3258 553,3258 588,3258 624,3257 660,3257 696,3257 732,3257 767,3257 803,3258 839,3258 875,3258 911,3260"/>
+                <TextEquiv>
+                    <Unicode>Op de laatste blz van Luik B vermelden : Yoorkant</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l63" custom="readingOrder {index:62;}">
+                <Coords points="964,3312 1925,3318 1969,3316 1969,3276 963,3272"/>
+                <Baseline
+                        points="974,3300 1023,3302 1072,3302 1121,3302 1170,3302 1220,3302 1269,3302 1318,3302 1367,3300 1416,3300 1466,3300 1515,3300 1564,3300 1613,3300 1662,3300 1712,3299 1761,3300 1810,3300 1859,3300 1908,3300 1958,3300"/>
+                <TextEquiv>
+                    <Unicode>bevoegd de rechtspersoon ten aanzien van derden te vertegenwoordigen</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="r3l64" custom="readingOrder {index:63;}">
+                <Coords points="776,3364 2028,3365 2028,3306 776,3313"/>
+                <Baseline
+                        points="788,3347 849,3347 910,3345 972,3345 1033,3345 1095,3344 1156,3344 1217,3344 1279,3344 1340,3344 1402,3344 1463,3344 1524,3344 1586,3344 1647,3344 1709,3344 1770,3344 1831,3344 1893,3344 1954,3344 2016,3344"/>
+                <TextEquiv>
+                    <Unicode>Achterkant Naam en handtekening (dit geldt niet voor akten van het type Mededelingen)
+                    </Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextEquiv>
+                <Unicode>Mod DOC 19.01
+                    In de bijlagen bij het Belgisch Staatsblad bekend te maken kopie
+                    na neerlegging van de akte ter griffie
+                    NEERLEGGING TER GRIFFIE VAN DE
+                    ONDERNEMINGSRECHTBANK GENT
+                    afdeling BRUGGE
+                    3 1 J011 2020
+
+
+                    *20091542*
+                    Griffie
+                    Ondernemingshr: 0833 057 774
+                    Naam
+                    (voluit): k&amp;c snacks
+                    (verkort)
+                    Rechtsvorm: besloten vennootschap
+                    Volledig adres v.d. zetel : meerlaan 71 bus 1, 8300 knokke-heist
+                    Onderwerp akte : BAV ontbinding en sluiting vereffening
+                    Er blijkt uit de notulen op zevenentwintig juli tweeduizendtwintig opgesteid door notaris Eric
+                    Deroose te
+                    Kniokke-Heist, dat de vergadering der aandeelhouders volgende beslissingen heeft genomen:
+                    EERSTE BESLISSING
+                    Verslagen
+                    Bij eenparigheid ontslaat de algemene vergadering de voorzitter lezing te geven van het verslag van
+                    het
+                    bestuursorgaan, opgesteld overeenkomstig artikel 2:71 Wetboek Vennootschappen en Verenigingen en van
+                    de
+                    bijgevoegde staat, alsook van het verslag van de bedrijfsrevisor betreffende de staat gevoegd bij
+                    het verslag
+                    van de zaakvoerders
+                    Het verslag van de bedrijfsrevisor Certam Bedrijfsrevisoren te 8560 Wevelgem, Kortrijkstraat 145
+                    voor wie
+                    optreedt de Heer Kristof Planquette, besluit in de volgende bewoordingen¬
+                    BESLUIT
+                    Overeenkomstig artikel 2:71 en 2:80 van het Wetboek van vennootschappen en verenigirigen brengen wij
+                    aan
+                    de buiten-gewone algemene vergadering verslag uit in het kader van onze opdracht als bedrijfsrevisor
+                    waarvoor
+                    wij aangesteld zijn blijkens opdrachtbrief van 19 mei 2020 vanwege het bestuursorgaan.
+                    In het kader van deze procedure tot ontbinding heeft het bestuursorgaan vani de vennootschap BV K
+                    &amp; C
+                    SNACKS een boekhoudkundige staat afgesloten op 19 mei 2020 die, rekeriing houdend met de
+                    vooruitzichten
+                    van de vereffening van de vennootschap, een balanstotaat opgeeft van 23,48 EUR en een nettopassief
+                    ten belope
+                    van 10.119,64 EUR
+                    Wij hebben de controle uitgevoerd van deze staat van de vennootschap opgesteld op grond van het in
+                    Belgié
+                    van toepas-sing zijnde boekhoudkundig referentiestelsel.
+                    Verantwoordelijkheid van het bestuursorgaan voor het opstellen van de staat van activa en passiva
+                    per 19
+                    mei 2020.
+                    Het bestuursorgaan is verantwoordelijk voor het opsteilen van de staat van actief en passief per 19
+                    mei 2020
+                    De boek-houdkundige staat moet getrouw zijn aan de werkelijkheid. Dat betekent dat de waarderingen
+                    te goeder
+                    trouw moeten worden verricht en dat het bestuursorgaan indien nodig, de boekhoudkundige staat moet
+                    vervolledigen met een verkla-rende bijlage over de keuze die het heeft gemaakt op het viak van
+                    waardering
+                    Verantwoordelijkheid van de bedrijfsrevisor
+                    De bedrijfsrevisor zal een gepaste beschrifving geven van de betekenisvolle posten van activa en
+                    passiva met
+                    bijzondere aandacht voor de waarderingsregels en voor de voornaamste uitgevoerde werkzaamheden.
+                    Het is onze verantwoordelijkheid verslag uit te brengen over de getrouwheid van de staat van actief
+                    en passief.
+                    Oordeel met voorbehoud
+                    Uit de controlewerkzaamheden, die wij hebben uitgevoerd overeenkomstig de toepasselijke
+                    professionele
+                    normen, blijkt, onder voorbehoud van de eventuele impact van een herziening van de resultaten ten
+                    gevolge van
+                    een controle van de belastingsdiensten met betrekking tot jaren die nog niet gecontroleerd werden,
+                    dat de
+                    toestand van de vennootschap per 19 mei 2020 op getrouwe wijze is weergegeven.
+                    Alle schulden ten aanzien van aandeelhouders en derden op datum van ondertekening van dit
+                    controleverstag
+                    werden betaald, hetzij werd de schriftelijke bevestigirig bekomen van de schuldeisers conform
+                    artikel 2:80 van
+                    het Wetboek van vennootschappen en verenigingen, meer bepaald met het feit dat deze schuld, zoals
+                    opgenomen in de staat van activa en passiva bedoeld in artikel 2:71 § 2, tweede lid op heden niet
+                    werd betaald,
+                    noch geconsigneerd.
+                    Gelet op voormeld nettopassief enerzijds en de som van de fiscaal voistorte inbreng zal naar
+                    aanleiding van
+                    onderhavig ontbinding en vereffening geen roerende voorheffing verschuldigd zijn. Rekening houdend
+                    met het
+                    Naam en hoedanigheid van de instrumenterende notaris, hetzij van de perso(ojnten)
+                    Op de laatste blz van Luik B vermelden : Yoorkant
+                    bevoegd de rechtspersoon ten aanzien van derden te vertegenwoordigen
+                    Achterkant Naam en handtekening (dit geldt niet voor akten van het type Mededelingen)
+                </Unicode>
+            </TextEquiv>
+        </TextRegion>
+    </Page>
+</PcGts>

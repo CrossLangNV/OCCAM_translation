@@ -1,8 +1,9 @@
 import abc
+import os
 
 import requests
 
-URL_BASE = 'https://mouse.occam.crosslang.com'
+URL_BASE = os.environ['MOUSE']
 
 
 class TmConnector(abc.ABC):

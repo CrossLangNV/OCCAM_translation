@@ -14,8 +14,8 @@ from sqlalchemy.orm import Session
 from starlette.responses import StreamingResponse
 from xml_orm.orm import XLIFFPageXML
 
-from translation.connector.cef_etranslation import ETranslationConnector
 from tm.tm_connector import MouseTmConnector
+from translation.connector.cef_etranslation import ETranslationConnector
 from . import crud, models, schemas
 from .database import SessionLocal, engine
 from .models import XMLDocument
@@ -142,7 +142,10 @@ async def read_page_xml_translation(xml_id: str,
     db_xml_trans = crud.get_xml_by_etranslation_id(db=db,
                                                    etranslation_id=xml_id)
 
-    return _read_page_xml_translation(db_xml_trans.etranslation_id, target=db_xml_trans.target, db=db)
+    return _read_page_xml_translation(db_xml_trans.etranslation_id,
+                                      target=db_xml_trans.target,
+                                      use_tm=db_xml_trans.use_tm,
+                                      db=db)
 
 
 @app.get("/translate/xmls/", response_model=List[schemas.XMLTrans])
