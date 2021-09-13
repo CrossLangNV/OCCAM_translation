@@ -53,7 +53,7 @@ class TestTranslatePageXML(unittest.TestCase):
         self.assertLess(response.status_code, 300, "Status code should indicate a proper connection.")
 
     def test_upload_small(self):
-        path_save = os.path.join(os.path.split(path_multi_page)[0],
+        path_save = os.path.join(os.path.split(PAGE_MINIMAL_MULTI)[0],
                                  'page_minimal_working_example_trans_multi.xml')
 
         with open(PAGE_MINIMAL, 'rb') as f:
@@ -71,7 +71,7 @@ class TestTranslatePageXML(unittest.TestCase):
         s_multi_page_trans = response.text
         l_s_multi_page_trans = s_multi_page_trans.splitlines()
 
-        with open(path_multi_page, 'r') as f:
+        with open(PAGE_MINIMAL_MULTI, 'r') as f:
             s_baseline = f.read()
         l_s_baseline = s_baseline.splitlines()
 
