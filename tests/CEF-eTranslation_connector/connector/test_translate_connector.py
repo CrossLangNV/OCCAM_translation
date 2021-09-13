@@ -12,7 +12,7 @@ import unittest
 
 import requests
 
-from connector.translate_connector import ETranslationConnector
+from connector.cef_etranslation import ETranslationConnector
 
 ROOT = os.path.join(os.path.dirname(__file__), '../../..')
 

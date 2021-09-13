@@ -5,14 +5,18 @@ import unittest
 from fastapi.testclient import TestClient
 from lxml import etree
 
-from api.main import app, _lookup_full_tm_match, _parse_text_page_xml, get_db
-from api.models import XMLDocument
-
-ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
+from app.main import app, _lookup_full_tm_match, _parse_text_page_xml, get_db
+from app.models import XMLDocument
 
 TEST_CLIENT = TestClient(app)
 
-DIR_EXAMPLE_FILES = os.path.join(ROOT, 'tests/CEF-eTranslation_connector/example_files')
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
+ROOT_MEDIA = os.path.join(ROOT, 'tests/media')
+
+FILENAME_CLARIAH_XML = os.path.join(ROOT_MEDIA,
+                                    'CLARIAH-VL_examples/1KBR/De_Standaard_19190401/PERO_OCR/KB_JB840_1919-04-01_01_0.xml')
+PAGE_MINIMAL = os.path.join(ROOT_MEDIA, 'example_files/page_minimal_working_example.xml')
+PAGE_MINIMAL_MULTI = os.path.join(ROOT_MEDIA, 'example_files/multilingual_page_minimal_working_example.xml')
 
 
 class TestApp(unittest.TestCase):
@@ -34,12 +38,10 @@ class TestApp(unittest.TestCase):
 
 class TestTranslatePageXML(unittest.TestCase):
     def test_upload(self):
-        path = os.path.join(ROOT,
-                            'CLARIAH-VL_examples/1KBR/De_Standaard_19190401/PERO_OCR/KB_JB840_1919-04-01_01_0.xml')
 
-        path_save = os.path.splitext(path)[0] + '_trans_multi.xml'
+        path_save = os.path.splitext(FILENAME_CLARIAH_XML)[0] + '_trans_multi.xml'
 
-        with open(path, 'rb') as f:
+        with open(FILENAME_CLARIAH_XML, 'rb') as f:
             files = {'file': f}
             headers = {'source': 'nl',
                        'target': 'fr'}
@@ -51,16 +53,10 @@ class TestTranslatePageXML(unittest.TestCase):
         self.assertLess(response.status_code, 300, "Status code should indicate a proper connection.")
 
     def test_upload_small(self):
-        path = os.path.join(DIR_EXAMPLE_FILES,
-                            'page_minimal_working_example.xml')
-
-        path_multi_page = os.path.join(DIR_EXAMPLE_FILES,
-                                       'multilingual_page_minimal_working_example.xml')
-
-        path_save = os.path.join(DIR_EXAMPLE_FILES,
+        path_save = os.path.join(os.path.split(path_multi_page)[0],
                                  'page_minimal_working_example_trans_multi.xml')
 
-        with open(path, 'rb') as f:
+        with open(PAGE_MINIMAL, 'rb') as f:
             files = {'file': f}
             headers = {'source': 'fr',
                        'target': 'en',
@@ -143,9 +139,7 @@ class TestTranslatePageXML(unittest.TestCase):
                         self.assertEqual(baseline_i, multi_page_trans_i)
 
     def test_upload_same_source_target_lang(self):
-        path = os.path.join(DIR_EXAMPLE_FILES,
-                            'page_minimal_working_example.xml')
-        with open(path, 'rb') as f:
+        with open(PAGE_MINIMAL, 'rb') as f:
             files = {'file': f}
             headers = {'source': 'en',
                        'target': 'en'}
@@ -157,19 +151,22 @@ class TestTranslatePageXML(unittest.TestCase):
 
 class TestTranslatePageXMLNonBlocking(unittest.TestCase):
 
-    def test_get_xmls(self):
+    def test_get_xmls(self, verbose=1):
         response = TEST_CLIENT.get("/translate/xmls/",
                                    # files=files,
                                    # headers=headers
                                    )
 
+        l = response.json()
+
+        if verbose:
+            print(len(l))
+
         self.assertLess(response.status_code, 300)
 
     def test_upload(self):
-        path = os.path.join(ROOT,
-                            'CLARIAH-VL_examples/1KBR/De_Standaard_19190401/PERO_OCR/KB_JB840_1919-04-01_01_0.xml')
 
-        with open(path, 'rb') as f:
+        with open(FILENAME_CLARIAH_XML, 'rb') as f:
             files = {'file': f}
             headers = {'source': 'nl',
                        'target': 'fr'}
@@ -183,10 +180,7 @@ class TestTranslatePageXMLNonBlocking(unittest.TestCase):
 
     def test_read(self):
 
-        path = os.path.join(ROOT,
-                            'CLARIAH-VL_examples/1KBR/De_Standaard_19190401/PERO_OCR/KB_JB840_1919-04-01_01_0.xml')
-
-        with open(path, 'rb') as f:
+        with open(FILENAME_CLARIAH_XML, 'rb') as f:
             files = {'file': f}
             headers = {'source': 'nl',
                        'target': 'fr'}
@@ -213,10 +207,7 @@ class TestTranslatePageXMLNonBlocking(unittest.TestCase):
 
     def test_upload_small(self):
 
-        path = os.path.join(DIR_EXAMPLE_FILES,
-                            'page_minimal_working_example.xml')
-
-        with open(path, 'rb') as f:
+        with open(PAGE_MINIMAL, 'rb') as f:
             files = {'file': f}
             headers = {'source': 'fr',
                        'target': 'en'}
@@ -230,10 +221,7 @@ class TestTranslatePageXMLNonBlocking(unittest.TestCase):
 
     def test_read_small(self):
 
-        path = os.path.join(DIR_EXAMPLE_FILES,
-                            'page_minimal_working_example.xml')
-
-        with open(path, 'rb') as f:
+        with open(PAGE_MINIMAL, 'rb') as f:
             files = {'file': f}
             headers = {'source': 'fr',
                        'target': 'en'}
@@ -317,10 +305,7 @@ def _get_text(el):
 
 
 def _get_tree_base():
-    path_multi_page = os.path.join(DIR_EXAMPLE_FILES,
-                                   'multilingual_page_minimal_working_example.xml')
-
-    with open(path_multi_page, 'r') as f:
+    with open(PAGE_MINIMAL_MULTI, 'r') as f:
         s_baseline = f.read()
     l_s_baseline = s_baseline.splitlines()
 
@@ -341,6 +326,11 @@ class TestParseXMLTextLines(unittest.TestCase):
         db_xml_document = _parse_text_page_xml(lines, 'en', 'nl', db)
         self.assertIsInstance(db_xml_document, XMLDocument)
         self.assertEqual(len(db_xml_document.lines), 3)
+
+
+class TestLineJoiner(unittest.TestCase):
+    def test_foo(self):
+        self.assertEqual(0, 1)  # TODO
 
 
 if __name__ == '__main__':

@@ -4,7 +4,7 @@ import unittest
 
 from lxml import etree
 
-from connector.translate_connector import ETranslationConnector
+from connector.cef_etranslation import ETranslationConnector
 from xml_orm.orm import PageXML
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
