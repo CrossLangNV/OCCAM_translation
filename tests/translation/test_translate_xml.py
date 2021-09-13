@@ -1,14 +1,23 @@
 import os
 import tempfile
 import unittest
+import warnings
 
 from lxml import etree
-
-from connector.cef_etranslation import ETranslationConnector
 from xml_orm.orm import PageXML
 
+from translation.connector.cef_etranslation import ETranslationConnector
+
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
-FOLDER_EXAMPLE_FILES = os.path.join(ROOT, 'tests/CEF-eTranslation_connector/example_files')
+FOLDER_EXAMPLE_FILES = os.path.join(ROOT, 'tests/media/example_files')
+
+FILENAME_OVERLAY = os.path.join(FOLDER_EXAMPLE_FILES, 'overlay_working.xml')
+FILENAME_OVERLAY_SMALL = os.path.join(FOLDER_EXAMPLE_FILES, 'overlay_working_small.xml')
+
+FILENAME_KBR_XML = os.path.join(ROOT,
+                                'tests/media/CLARIAH-VL_examples/1KBR/De_Standaard_19190401/PERO_OCR/KB_JB840_1919-04-01_01_0_fixed.xml')
+
+warnings.warn('This set of tests are deprecated since it is not advised to translate the xml directly!', UserWarning)
 
 
 class TestTranslateXML(unittest.TestCase):
@@ -40,22 +49,18 @@ class TestTranslateXML(unittest.TestCase):
         SOURCE = 'NL'
         TARGET = 'EN'
 
-        for name in ['pero_ocr_overlay1.xml',
-                     'pero_ocr_overlay_small1.xml']:
-            with self.subTest(name):
-                FILENAME = os.path.join(FOLDER_EXAMPLE_FILES,
-                                        name
-                                        )
-
+        for filename in [FILENAME_OVERLAY,
+                         FILENAME_OVERLAY_SMALL]:
+            with self.subTest(os.path.split(filename)[-1]):
                 r = self.connector.trans_doc_blocking(SOURCE,
                                                       TARGET,
-                                                      FILENAME
+                                                      filename,
                                                       )
 
                 content = r.get('content')
                 self.assertTrue(content)
 
-                xml_base = PageXML(FILENAME)
+                xml_base = PageXML(filename)
                 xml_base.validate()
 
                 xml = _get_xml_from_content(content)
@@ -63,7 +68,8 @@ class TestTranslateXML(unittest.TestCase):
                 print(etree.dump(xml_base.element_tree.getroot()))
                 print(etree.dump(xml.element_tree.getroot()))
 
-                self.assertTrue(xml.validate())
+                with self.subTest('Validation should fail on the date.'):
+                    self.assertRaises(Exception, xml.validate)
 
     def test_translate_header(self):
         """
@@ -114,17 +120,15 @@ class TestTranslateXML(unittest.TestCase):
                 self.assertEqual(c_meta_i.text, c_meta_root_i.text)
 
     def test_translate(self):
-        FILENAME = os.path.join(ROOT,
-                                'CLARIAH-VL_examples/1KBR/De_Standaard_19190401/PERO_OCR/KB_JB840_1919-04-01_01_0_fixed.xml')
 
         SOURCE = 'NL'
         TARGET = 'EN'
 
-        FILENAME_TRANS = os.path.splitext(FILENAME)[0] + f'_{SOURCE}_{TARGET}.xml'
+        FILENAME_TRANS = os.path.splitext(FILENAME_KBR_XML)[0] + f'_{SOURCE}_{TARGET}.xml'
 
         r = self.connector.trans_doc_blocking(SOURCE,
                                               TARGET,
-                                              FILENAME
+                                              FILENAME_KBR_XML
                                               )
 
         self.assertTrue(r.get('content'))
@@ -164,16 +168,22 @@ class TestTranslateXML(unittest.TestCase):
 
                     xml = PageXML(filename_trans)
 
-                    self.assertTrue(xml_base.validate(),
-                                    'Sanity check')
+                    with self.subTest('Sanity check'):
+                        try:
+                            xml_base.validate()
+                        except Exception:
+                            self.fail("validate raised Exception unexpectedly!")
 
                     b = 0
                     if b:  # Debugging
                         print(etree.dump(xml_base.element_tree.getroot()))
                         print(etree.dump(xml.element_tree.getroot()))
 
-                    self.assertTrue(xml.validate())
-
+                    with self.subTest('Validation (Ignore atm)'):
+                        try:
+                            xml.validate()
+                        except Exception:
+                            self.fail("validate raised Exception unexpectedly!")
 
 def _get_xml_from_content(content):
     with tempfile.TemporaryDirectory() as d:
