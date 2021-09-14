@@ -1,4 +1,5 @@
 import os
+import re
 import sys
 import unittest
 
@@ -41,16 +42,33 @@ class TestTranslatePageXML(unittest.TestCase):
 
         path_save = os.path.splitext(FILENAME_CLARIAH_XML)[0] + '_trans_multi.xml'
 
+        source = 'nl'
+        target = 'fr'
+
         with open(FILENAME_CLARIAH_XML, 'rb') as f:
             files = {'file': f}
-            headers = {'source': 'nl',
-                       'target': 'fr'}
+            headers = {'source': source,
+                       'target': target}
             response = TEST_CLIENT.post("/translate/xml/blocking", files=files, headers=headers)
+
+        self.assertLess(response.status_code, 300, "Status code should indicate a proper connection.")
 
         with open(path_save, 'w') as f:
             f.write(response.text)
 
-        self.assertLess(response.status_code, 300, "Status code should indicate a proper connection.")
+        with self.subTest('Find original'):
+            self.assertIn(f'"{source.lower()}', response.text)
+
+        with self.subTest('Find translation'):
+            self.assertIn(f'"{target.lower()}', response.text)
+
+        def _get_num_occur(string, substring):
+            return len([None for _ in re.finditer(substring, string)])
+
+        with self.subTest('# of translations units'):
+            self.assertEqual(_get_num_occur(response.text, f'"{source.lower()}"'),
+                             _get_num_occur(response.text, f'"{target.lower()}"'),
+                             'Should have same amount of source and target units.')
 
     def test_upload_small(self):
         path_save = os.path.join(os.path.split(PAGE_MINIMAL_MULTI)[0],

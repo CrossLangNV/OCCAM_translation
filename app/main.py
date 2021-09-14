@@ -15,6 +15,7 @@ from xml_orm.orm import XLIFFPageXML
 
 from tm.tm_connector import MouseTmConnector
 from translation.connector.cef_etranslation import ETranslationConnector
+from translation.translate_xml import SentenceParser
 from . import crud, models, schemas
 from .database import SessionLocal, engine
 from .models import XMLDocument
@@ -137,11 +138,8 @@ def read_trans_xmls(skip: int = 0, limit: int = 100, db: Session = Depends(get_d
 def _submit_page_xml_translation(xml, source, target, filename, use_tm, db):
     # ORM of XML
     # convert file to XLIFF Page.
-    # TODO check if XLIFF. If so, no need to convert to XLIFF from Page.
-    # TODO check if ALREADY XLIFF, then no need for "from page"
 
     # Make sure the XML is valid.
-    # TODO this could be removed in the future when we are sure the XML is always valid.
     try:
         xml.validate()
     except:
@@ -153,7 +151,10 @@ def _submit_page_xml_translation(xml, source, target, filename, use_tm, db):
     connector = ETranslationConnector()
 
     # First send trans requests, then request the response.
-    lines_text = xml.get_lines_text()
+
+    # Get sentences from the textlines
+    parser = SentenceParser(xml)
+    lines_text = parser.get_sentences()
 
     if use_tm:
         # Create a XML Document object that holds 100% TM matches
@@ -195,22 +196,31 @@ def _read_page_xml_translation(xml_id, target, use_tm, db) -> Response:
     r = connector.trans_doc_id(xml_id)
     db_xml_trans = crud.get_xml_by_etranslation_id(db=db,
                                                    etranslation_id=xml_id)
+
+    with io.BytesIO(db_xml_trans.xml_content.encode('utf-8')) as f:
+        xml_orm = XLIFFPageXML(f)
+
     if use_tm:
         db_xml_document = crud.get_document(db=db, document_id=db_xml_trans.xml_document_id)
+
     if r:
-        l_trans_text = list(map(str.strip, r.get('content').decode('UTF-8').splitlines()))
+        l_trans_sent = list(map(str.strip, r.get('content').decode('UTF-8').splitlines()))
         if use_tm:
-            l_trans_text = _update_trans_text_lines_with_matches(l_trans_text, db_xml_document)
+            l_trans_sent = _update_trans_text_lines_with_matches(l_trans_sent, db_xml_document)
+
+        # Get sentences from the textlines
+        parser = SentenceParser(xml_orm)
+        region_lines_new = parser.reconstruct_lines(l_trans_sent)
+        l_trans_text = [line for region in region_lines_new for line in region]
+
     else:
         content = {'message': 'translation not finished.'}
         return JSONResponse(content, status_code=423)
 
-    xml = XLIFFPageXML(io.BytesIO(db_xml_trans.xml_content.encode('utf-8')))
-
     # Add to XML
-    xml.add_targets(l_trans_text, target)
+    xml_orm.add_targets(l_trans_text, target)
 
-    data = xml.to_bstring()
+    data = xml_orm.to_bstring()
 
     basename, ext = db_xml_trans.filename.split('.', 1)
 
