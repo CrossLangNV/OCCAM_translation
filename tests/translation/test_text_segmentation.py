@@ -33,7 +33,7 @@ class TestLineJoiner(unittest.TestCase):
         n_region_new = [sum(map(len, region)) + len([line for line in region if line]) - 1 for region in
                         region_lines_new]
 
-        n_region_old = list(map(len, xml_orm.get_regions_text()))
+        n_region_old = list(map(len, self.xml_orm.get_regions_text()))
 
         for i, (n_new, n_old) in enumerate(zip(n_region_new, n_region_old)):
             with self.subTest(i):

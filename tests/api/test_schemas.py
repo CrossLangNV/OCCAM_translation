@@ -1,18 +1,17 @@
 import unittest
 
-from api.schemas import XMLDocumentLineBase
+from app.schemas import XMLDocumentLineBase
 
 
 class TestXMLDocumentLineBase(unittest.TestCase):
     def test_keys(self):
-        match = 'Test match'
+        full_match = 'Test match'
         text = 'Test text'
         obj = XMLDocumentLineBase(text=text,
-                                  match=match)
+                                  full_match=full_match)
 
         with self.subTest('Text'):
             self.assertEqual(obj.text, text)
 
         with self.subTest('Match'):
-            self.assertEqual(obj.match, match)
-
+            self.assertEqual(obj.full_match, full_match)

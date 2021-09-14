@@ -161,7 +161,7 @@ def _submit_page_xml_translation(xml, source, target, filename, use_tm, db):
         lines_text = []
         for document_line in db_xml_document.lines:
             # if there's a 100% TM match, don't send the source text to MT, append empty line
-            if document_line.match:
+            if document_line.full_match:
                 lines_text.append('')
             else:
                 lines_text.append(document_line.text)
@@ -237,7 +237,7 @@ def _parse_text_page_xml(lines, source, target, db):
         full_match = _lookup_full_tm_match(line, source + '-' + target)
         xml_document_line = XMLDocumentLineCreate(
             text=line,
-            match=full_match,
+            full_match=full_match,
             document_id=db_xml_document.id
         )
         crud.create_xml_document_line(db, xml_document_line, db_xml_document.id)

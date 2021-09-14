@@ -29,8 +29,7 @@ class XMLTrans(XMLTransBase, XMLTransOut):
 
 class XMLDocumentLineBase(BaseModel):
     text: str
-    match:
-    str
+    full_match: str
 
 
 class XMLDocumentLineCreate(XMLDocumentLineBase):
