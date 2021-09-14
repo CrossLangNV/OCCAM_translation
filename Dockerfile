@@ -5,5 +5,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # OCCAM Transcription
 RUN pip install git+https://github.com/CrossLangNV/OCCAM_transcription.git
+# NLTK
+RUN python -m nltk.downloader punkt
 
 WORKDIR "/app"

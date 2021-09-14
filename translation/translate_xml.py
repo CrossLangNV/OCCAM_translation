@@ -1,6 +1,7 @@
 import os
 import tempfile
 import warnings
+from typing import List
 
 from nltk.tokenize import sent_tokenize
 from xml_orm.orm import OverlayXML
@@ -125,29 +126,40 @@ class SentenceParser:
 
         return sentences
 
-    def reconstruct_lines(self, sentences):
+    def group_sentences_per_region(self, sentences):
         """
-        Tries to construct the sentences back as close to the original structure of the text lines.
-
-        TODO
-         * Actually use these sentences
+        Reverse operation: going from get_sentences() to get_region_sentences() again.
         """
 
         region_sentences_orig = self.get_region_sentences()
-
-        assert len(sentences) == sum(len(sent_reg_orig) for sent_reg_orig in region_sentences_orig), \
+        assert len(sentences) == sum(len(sent_reg_orig) for sent_reg_orig in self.get_region_sentences()), \
             'Sentences should be matched'
+
+        region_sentences = [[] for _ in region_sentences_orig]
+
+        for i, sent_orig_i in enumerate(region_sentences_orig):
+            region_sentences[i] = [sentences.pop(0) for _ in sent_orig_i]
+
+        return region_sentences
+
+    def reconstruct_lines(self, sentences: List[str]):
+        """
+        Tries to construct the sentences back as close to the original structure of the text lines.
+        """
+
+        region_sentences_orig = self.get_region_sentences()
+        region_sentences = self.group_sentences_per_region(sentences)
 
         region_lines = self.xml.get_regions_lines_text()
 
         region_lines_new = [[]] * len(region_lines)
-        i_sentence_total = 0
-        for i_region, (sentences_region_orig, lines_region) in enumerate(zip(region_sentences_orig, region_lines)):
 
-            sentences_region_orig_copy = sentences_region_orig[:]
+        for i_region, (sentences_region, sentences_region_orig, lines_region) in enumerate(
+                zip(region_sentences, region_sentences_orig, region_lines)):
 
+            sentences_region_copy = sentences_region[:]
+            n_sent_reg_orig = list(map(len, sentences_region_orig))
             n_lines_region = list(map(len, lines_region))
-            n_sent_reg_orig = list(map(len, sentences_region_orig_copy))
 
             lines_region_new = [[] for _ in range(len(lines_region))]
 
@@ -158,10 +170,10 @@ class SentenceParser:
                 i_c_begin_line_next = i_c_begin_line + n_line + 1
 
                 while i_c_begin_line <= i_c_begin_sent < i_c_begin_line_next:
-                    if len(sentences_region_orig_copy) == 0:
+                    if len(sentences_region_copy) == 0:
                         break
-                    lines_region_new[i_line].append(sentences_region_orig_copy.pop(0))
 
+                    lines_region_new[i_line].append(sentences_region_copy.pop(0))
                     i_c_begin_sent_next = i_c_begin_sent + n_sent_reg_orig.pop(0) + 1
                     i_c_begin_sent = i_c_begin_sent_next
 
@@ -169,9 +181,7 @@ class SentenceParser:
 
             region_lines_new[i_region] = [' '.join(lines) for lines in lines_region_new]
 
-            # TODO split up sentences
-            # TODO first do simple! Just put sent at right place
-            # Then cut at the right place!
+            # TODO Cut a single sentence over multiple lines at the right place!
 
             pass
 
