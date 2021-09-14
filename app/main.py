@@ -9,7 +9,6 @@ from typing import Optional
 from fastapi import Depends, FastAPI
 from fastapi import UploadFile, File, Response, Header
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from starlette.responses import StreamingResponse
 from xml_orm.orm import XLIFFPageXML
@@ -19,7 +18,7 @@ from translation.connector.cef_etranslation import ETranslationConnector
 from . import crud, models, schemas
 from .database import SessionLocal, engine
 from .models import XMLDocument
-from .schemas import XMLDocumentCreate, XMLDocumentLineCreate
+from .schemas import XMLDocumentCreate, XMLDocumentLineCreate, XMLTransOut
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -35,34 +34,16 @@ def get_db():
         db.close()
 
 
-# def clear_data(session):
-#     meta = db.metadata
-#     for table in reversed(meta.sorted_tables):
-#         print() 'Clear table %s' % table)
-#         session.execute(table.delete())
-#     session.commit()
 b = 0
 if b:
     db = next(get_db())
 
     db.drop_all()
 
-    # clear_data
-
-    # db.query(models.XMLTrans).delete()
-    # db.commit()
-
-
-# SessionLocal().query(models.XMLTrans).delete()
 
 @app.get("/")
 async def root():
     return {"message": "FASTAPI for the microservice: translation of layout XML."}
-
-
-class SourceTarget(BaseModel):
-    source: Optional[str] = None
-    target: str
 
 
 @app.post("/translate/xml/blocking")
@@ -94,10 +75,6 @@ async def translate_page_xml(file: UploadFile = File(...),
             return r
         else:
             sleep(1)  # Time in seconds
-
-
-class XMLTransOut(BaseModel):
-    id: str
 
 
 @app.post("/translate/xml", response_model=XMLTransOut)
@@ -169,7 +146,6 @@ def _submit_page_xml_translation(xml, source, target, filename, use_tm, db):
         xml.validate()
     except:
         xml.auto_fix()
-    finally:
         # If it can't be fixed, probably not safe to continue
         xml.validate()
 
