@@ -14,7 +14,7 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
 ROOT_MEDIA = os.path.join(ROOT, 'tests/media')
 
 FILENAME_CLARIAH_XML = os.path.join(ROOT_MEDIA,
-                                    'CLARIAH-VL_examples/1KBR/De_Standaard_19190401/PERO_OCR/KB_JB840_1919-04-01_01_0.xml')
+                                    'CLARIAH-VL_examples/1KBR/De_Standaard_19190401/PERO_OCR/KB_JB840_1919-04-01_01_0_fixed.xml')
 PAGE_MINIMAL = os.path.join(ROOT_MEDIA, 'example_files/page_minimal_working_example.xml')
 PAGE_MINIMAL_MULTI = os.path.join(ROOT_MEDIA, 'example_files/multilingual_page_minimal_working_example.xml')
 
@@ -151,19 +151,6 @@ class TestTranslatePageXML(unittest.TestCase):
 
 class TestTranslatePageXMLNonBlocking(unittest.TestCase):
 
-    def test_get_xmls(self, verbose=1):
-        response = TEST_CLIENT.get("/translate/xmls/",
-                                   # files=files,
-                                   # headers=headers
-                                   )
-
-        l = response.json()
-
-        if verbose:
-            print(len(l))
-
-        self.assertLess(response.status_code, 300)
-
     def test_upload(self):
 
         with open(FILENAME_CLARIAH_XML, 'rb') as f:
@@ -282,6 +269,35 @@ class TestTranslatePageXMLNonBlocking(unittest.TestCase):
             self._check_tree_equal(child_i, child_j)
 
 
+class TestGetAllXMLS(unittest.TestCase):
+    def test_get_xmls(self, verbose=1):
+        response = TEST_CLIENT.get("/translate/xmls/",
+                                   # files=files,
+                                   # headers=headers
+                                   )
+
+        l = response.json()
+
+        if verbose:
+            print(len(l))
+
+        self.assertLess(response.status_code, 300)
+
+
+class TestParseXMLTextLines(unittest.TestCase):
+
+    def test_lookup_full_tm_match(self):
+        full_match = _lookup_full_tm_match('this is a test', 'en-nl')
+        self.assertIsInstance(full_match, str)
+
+    def test_parse_text_page_xml(self):
+        lines = ['this', 'this is a', 'this is a test']
+        db = next(get_db())
+        db_xml_document = _parse_text_page_xml(lines, 'en', 'nl', db)
+        self.assertIsInstance(db_xml_document, XMLDocument)
+        self.assertEqual(len(db_xml_document.lines), 3)
+
+
 def _single_line_html(l,
                       b_replace_quote=True):
     s = ''
@@ -312,25 +328,6 @@ def _get_tree_base():
     s_baseline_single = _single_line_html(l_s_baseline)
     tree_base = etree.fromstring(s_baseline_single.encode('utf-8'))
     return tree_base
-
-
-class TestParseXMLTextLines(unittest.TestCase):
-
-    def test_lookup_full_tm_match(self):
-        full_match = _lookup_full_tm_match('this is a test', 'en-nl')
-        self.assertIsInstance(full_match, str)
-
-    def test_parse_text_page_xml(self):
-        lines = ['this', 'this is a', 'this is a test']
-        db = next(get_db())
-        db_xml_document = _parse_text_page_xml(lines, 'en', 'nl', db)
-        self.assertIsInstance(db_xml_document, XMLDocument)
-        self.assertEqual(len(db_xml_document.lines), 3)
-
-
-class TestLineJoiner(unittest.TestCase):
-    def test_foo(self):
-        self.assertEqual(0, 1)  # TODO
 
 
 if __name__ == '__main__':
