@@ -251,8 +251,8 @@ def _update_trans_text_lines_with_matches(translated_lines, db_xml_document: XML
     if len(translated_lines) == 0:
         translated_lines = ['']
     for document_line, translation in zip(document_lines, cycle(translated_lines)):
-        if document_line.match:
-            updated_lines_with_matches.append(document_line.match)
+        if document_line.full_match:
+            updated_lines_with_matches.append(document_line.full_match)
         else:
             updated_lines_with_matches.append(translation)
 
