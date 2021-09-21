@@ -3,6 +3,7 @@ import tempfile
 import warnings
 from typing import List
 
+import numpy as np
 from nltk.tokenize import sent_tokenize
 from xml_orm.orm import OverlayXML
 
@@ -131,6 +132,9 @@ class SentenceParser:
         Reverse operation: going from get_sentences() to get_region_sentences() again.
         """
 
+        # Copy
+        sentences = sentences[:]
+
         region_sentences_orig = self.get_region_sentences()
         assert len(sentences) == sum(len(sent_reg_orig) for sent_reg_orig in self.get_region_sentences()), \
             'Sentences should be matched'
@@ -159,6 +163,7 @@ class SentenceParser:
 
             sentences_region_copy = sentences_region[:]
             n_sent_reg_orig = list(map(len, sentences_region_orig))
+            n_sent_reg_new = list(map(len, sentences_region_copy))
             n_lines_region = list(map(len, lines_region))
 
             lines_region_new = [[] for _ in range(len(lines_region))]
@@ -166,18 +171,81 @@ class SentenceParser:
             i_c_begin_line = 0
             i_c_begin_sent = 0
 
-            for i_line, n_line in enumerate(n_lines_region):
-                i_c_begin_line_next = i_c_begin_line + n_line + 1
+            # l_i_line = [0] +
+            # l_i_sent = [0] +
 
-                while i_c_begin_line <= i_c_begin_sent < i_c_begin_line_next:
-                    if len(sentences_region_copy) == 0:
-                        break
+            def get_i_begin_end(list_n, j):
 
-                    lines_region_new[i_line].append(sentences_region_copy.pop(0))
-                    i_c_begin_sent_next = i_c_begin_sent + n_sent_reg_orig.pop(0) + 1
-                    i_c_begin_sent = i_c_begin_sent_next
+                i_begin = sum(list_n[:j]) + len(list_n[:max(0, j - 1)])
+                i_end = sum(list_n[:j + 1]) + len(list_n[:max(0, j)])
 
-                i_c_begin_line = i_c_begin_line_next
+                return i_begin, i_end
+
+            # Per sentence
+            for j, (n_sent_reg_orig_j, sentences_region_j) in enumerate(zip(n_sent_reg_orig, sentences_region_copy)):
+
+                i_begin, i_end = get_i_begin_end(n_sent_reg_orig, j)
+
+                n_sent_i_over_lines = []
+                for k in range(len(n_lines_region)):
+                    i_begin_k, i_end_k = get_i_begin_end(n_lines_region, k)
+
+                    # overlap
+                    i_begin_max = max(i_begin, i_begin_k)
+                    i_end_min = min(i_end, i_end_k)
+                    n_k = max(i_end_min - i_begin_max, 0)
+                    n_sent_i_over_lines.append(n_k)
+
+                p_sent_i_over_lines = np.array(n_sent_i_over_lines) / np.sum(n_sent_i_over_lines)
+
+                n_sent_i_over_lines_new = p_sent_i_over_lines * n_sent_reg_new[j]
+
+                i_sent_i_over_lines_new = np.concatenate([[0.], np.cumsum(n_sent_i_over_lines_new)])
+
+                for i_line, (i_0, i_1) in enumerate(zip(i_sent_i_over_lines_new[:-1],
+                                                        i_sent_i_over_lines_new[1:])):
+
+                    if i_0 == i_1:
+                        continue  # length = 0
+
+                    if i_0 == 0:
+                        i_0_star = 0
+                    else:
+                        i_0_star = sentences_region_j.find(' ', int(np.ceil(i_0))) + 1
+
+                    i_1_star = sentences_region_j.find(' ', int(np.ceil(i_1)))
+                    if i_1_star == -1:
+                        i_1_star = len(sentences_region_j)
+
+                    s_crop = sentences_region_j[i_0_star: i_1_star]
+
+                    lines_region_new[i_line].append(s_crop)
+
+                    # print(i_0, i_1)
+
+                # i_0
+                # i_1
+
+                # sentences_region_copy[j]
+
+                # lines_region_new = None # TODO
+
+            # n_sent_i_over_lines = []
+            # p_sent_i_over_lines = [] # Percentage that sentence is spread over each line.
+
+            if 0:
+                for i_line, n_line in enumerate(n_lines_region):
+                    i_c_begin_line_next = i_c_begin_line + n_line + 1
+
+                    while i_c_begin_line <= i_c_begin_sent < i_c_begin_line_next:
+                        if len(sentences_region_copy) == 0:
+                            break
+
+                        lines_region_new[i_line].append(sentences_region_copy.pop(0))
+                        i_c_begin_sent_next = i_c_begin_sent + n_sent_reg_orig.pop(0) + 1
+                        i_c_begin_sent = i_c_begin_sent_next
+
+                    i_c_begin_line = i_c_begin_line_next
 
             region_lines_new[i_region] = [' '.join(lines) for lines in lines_region_new]
 
