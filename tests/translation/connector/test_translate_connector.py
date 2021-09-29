@@ -12,21 +12,16 @@ import unittest
 
 import requests
 
-from connector.translate_connector import ETranslationConnector
+from translation.connector.cef_etranslation import ETranslationConnector
 
-ROOT = os.path.join(os.path.dirname(__file__), '../../..')
+ROOT_MEDIA = os.path.join(os.path.dirname(__file__), '../../media')
 
-base_url = 'https://mtapi.occam.crosslang.com/'
-headers = {'wso2-app': 'myapp',
-           'Authorization': 'Basic Y3Jvc3NsYW5nOmlzdGhlYmVzdA=='}
-
-base_url_new = 'https://etranslation.occam.crosslang.com/'
-
-FILENAME_TXT = os.path.join(ROOT,
+FILENAME_TXT = os.path.join(ROOT_MEDIA,
                             'CLARIAH-VL_examples/1KBR/De_Standaard_19190401/PERO_OCR/KB_JB840_1919-04-01_01_0.txt')
-FILENAME_XML = os.path.join(ROOT,
-                            'CLARIAH-VL_examples/1KBR/De_Standaard_19190401/PERO_OCR/KB_JB840_1919-04-01_01_0_fixed_NL_EN.xml')
-FILENAME_BRIS_XML = os.path.join(ROOT, 'BRIS_examples/transkribus_lite/20091542_p001.xml')
+FILENAME_XML = os.path.join(ROOT_MEDIA,
+                            'CLARIAH-VL_examples/1KBR/De_Standaard_19190401/PERO_OCR/KB_JB840_1919-04-01_01_0_fixed.xml')
+
+FILENAME_BRIS_XML = os.path.join(ROOT_MEDIA, 'BRIS/20091542_p001.xml')
 
 for filename in [FILENAME_TXT, FILENAME_XML, FILENAME_BRIS_XML]:
     assert os.path.exists(filename), 'Sanity check'
@@ -291,19 +286,14 @@ class TestKBR(unittest.TestCase):
         self.connector = ETranslationConnector()
 
     def test_translate(self):
-
-        source = 'fr'
+        source = 'nl'
         target = 'en'
-
-        with open(FILENAME_XML) as f:
-            xml_orig = f.readlines()
 
         r = self.connector.trans_doc_blocking(source, target, FILENAME_XML)
 
         r.get('content')
 
-        filename_trans = os.path.join(ROOT,
-                                      f'data_uses_cases/1scraper_kbr/KB_JB555_1910-01-01_01-00001_trans_{source}_{target}.xml')
+        filename_trans = os.path.splitext(FILENAME_XML)[0] + f'_{source}_{target}.xml'
 
         folder = os.path.split(filename_trans)[0]
         if not os.path.exists(folder):

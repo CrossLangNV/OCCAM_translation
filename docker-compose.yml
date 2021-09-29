@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+
+  xml_trans:
+    build: .
+    environment:
+      - MODULE_NAME=app.main
+    ports:
+      - 9050:80
+    env_file:
+      - ./secrets/occam.env
+    volumes:
+      - ./app:/app/app
+      - ./translation:/app/translation
+      - ./tm:/app/tm
+      - ./tests:/app/tests

@@ -9,6 +9,7 @@ class XMLTransBase(BaseModel):
     filename: str
     source: str
     target: str
+    use_tm: bool
     xml_document_id: int
 
 
@@ -16,16 +17,19 @@ class XMLTransCreate(XMLTransBase):
     pass
 
 
-class XMLTrans(XMLTransBase):
-    id: int
+class XMLTransOut(BaseModel):
+    """Allowed information to return"""
+    id: str
 
+
+class XMLTrans(XMLTransBase, XMLTransOut):
     class Config:
         orm_mode = True
 
 
 class XMLDocumentLineBase(BaseModel):
     text: str
-    match: str
+    full_match: str
 
 
 class XMLDocumentLineCreate(XMLDocumentLineBase):

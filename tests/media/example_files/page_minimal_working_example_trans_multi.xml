@@ -17,7 +17,7 @@
           <Unicode>ayant pouvoir de représenter la personne morale à légard des tiers</Unicode>
           <trans-unit id="r000-l000">
             <source xml:lang="fr">ayant pouvoir de représenter la personne morale à légard des tiers</source>
-            <target xml:lang="en"> having the power to represent the legal person with regard to third parties</target>
+            <target xml:lang="en">having the power to represent the legal person in legard of third parties</target>
           </trans-unit>
         </TextEquiv>
       </TextLine>

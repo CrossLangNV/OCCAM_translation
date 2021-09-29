@@ -19,6 +19,7 @@ class XMLTrans(Base):
 
     source = Column(String)
     target = Column(String)
+    use_tm = Column(Boolean)
 
     created = Column(DateTime)
     finished = Column(DateTime, default=None)
@@ -47,7 +48,7 @@ class XMLDocumentLine(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     text = Column(String)
-    match = Column(String)
+    full_match = Column(String)
     document_id = Column(Integer, ForeignKey("document.id"))
 
     document = relationship("XMLDocument", back_populates="lines")

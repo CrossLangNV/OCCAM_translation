@@ -1,18 +1,23 @@
 import os
+import re
 import sys
 import unittest
 
 from fastapi.testclient import TestClient
 from lxml import etree
 
-from api.main import app, _lookup_full_tm_match, _parse_text_page_xml, get_db
-from api.models import XMLDocument
-
-ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
+from app.main import app, _lookup_full_tm_match, _parse_text_page_xml, get_db
+from app.models import XMLDocument
 
 TEST_CLIENT = TestClient(app)
 
-DIR_EXAMPLE_FILES = os.path.join(ROOT, 'tests/CEF-eTranslation_connector/example_files')
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
+ROOT_MEDIA = os.path.join(ROOT, 'tests/media')
+
+FILENAME_CLARIAH_XML = os.path.join(ROOT_MEDIA,
+                                    'CLARIAH-VL_examples/1KBR/De_Standaard_19190401/PERO_OCR/KB_JB840_1919-04-01_01_0_fixed.xml')
+PAGE_MINIMAL = os.path.join(ROOT_MEDIA, 'example_files/page_minimal_working_example.xml')
+PAGE_MINIMAL_MULTI = os.path.join(ROOT_MEDIA, 'example_files/multilingual_page_minimal_working_example.xml')
 
 
 class TestApp(unittest.TestCase):
@@ -34,33 +39,42 @@ class TestApp(unittest.TestCase):
 
 class TestTranslatePageXML(unittest.TestCase):
     def test_upload(self):
-        path = os.path.join(ROOT,
-                            'CLARIAH-VL_examples/1KBR/De_Standaard_19190401/PERO_OCR/KB_JB840_1919-04-01_01_0.xml')
 
-        path_save = os.path.splitext(path)[0] + '_trans_multi.xml'
+        path_save = os.path.splitext(FILENAME_CLARIAH_XML)[0] + '_trans_multi.xml'
 
-        with open(path, 'rb') as f:
+        source = 'nl'
+        target = 'fr'
+
+        with open(FILENAME_CLARIAH_XML, 'rb') as f:
             files = {'file': f}
-            headers = {'source': 'nl',
-                       'target': 'fr'}
+            headers = {'source': source,
+                       'target': target}
             response = TEST_CLIENT.post("/translate/xml/blocking", files=files, headers=headers)
+
+        self.assertLess(response.status_code, 300, "Status code should indicate a proper connection.")
 
         with open(path_save, 'w') as f:
             f.write(response.text)
 
-        self.assertLess(response.status_code, 300, "Status code should indicate a proper connection.")
+        with self.subTest('Find original'):
+            self.assertIn(f'"{source.lower()}', response.text)
+
+        with self.subTest('Find translation'):
+            self.assertIn(f'"{target.lower()}', response.text)
+
+        def _get_num_occur(string, substring):
+            return len([None for _ in re.finditer(substring, string)])
+
+        with self.subTest('# of translations units'):
+            self.assertEqual(_get_num_occur(response.text, f'"{source.lower()}"'),
+                             _get_num_occur(response.text, f'"{target.lower()}"'),
+                             'Should have same amount of source and target units.')
 
     def test_upload_small(self):
-        path = os.path.join(DIR_EXAMPLE_FILES,
-                            'page_minimal_working_example.xml')
-
-        path_multi_page = os.path.join(DIR_EXAMPLE_FILES,
-                                       'multilingual_page_minimal_working_example.xml')
-
-        path_save = os.path.join(DIR_EXAMPLE_FILES,
+        path_save = os.path.join(os.path.split(PAGE_MINIMAL_MULTI)[0],
                                  'page_minimal_working_example_trans_multi.xml')
 
-        with open(path, 'rb') as f:
+        with open(PAGE_MINIMAL, 'rb') as f:
             files = {'file': f}
             headers = {'source': 'fr',
                        'target': 'en',
@@ -75,7 +89,7 @@ class TestTranslatePageXML(unittest.TestCase):
         s_multi_page_trans = response.text
         l_s_multi_page_trans = s_multi_page_trans.splitlines()
 
-        with open(path_multi_page, 'r') as f:
+        with open(PAGE_MINIMAL_MULTI, 'r') as f:
             s_baseline = f.read()
         l_s_baseline = s_baseline.splitlines()
 
@@ -143,9 +157,7 @@ class TestTranslatePageXML(unittest.TestCase):
                         self.assertEqual(baseline_i, multi_page_trans_i)
 
     def test_upload_same_source_target_lang(self):
-        path = os.path.join(DIR_EXAMPLE_FILES,
-                            'page_minimal_working_example.xml')
-        with open(path, 'rb') as f:
+        with open(PAGE_MINIMAL, 'rb') as f:
             files = {'file': f}
             headers = {'source': 'en',
                        'target': 'en'}
@@ -157,19 +169,9 @@ class TestTranslatePageXML(unittest.TestCase):
 
 class TestTranslatePageXMLNonBlocking(unittest.TestCase):
 
-    def test_get_xmls(self):
-        response = TEST_CLIENT.get("/translate/xmls/",
-                                   # files=files,
-                                   # headers=headers
-                                   )
-
-        self.assertLess(response.status_code, 300)
-
     def test_upload(self):
-        path = os.path.join(ROOT,
-                            'CLARIAH-VL_examples/1KBR/De_Standaard_19190401/PERO_OCR/KB_JB840_1919-04-01_01_0.xml')
 
-        with open(path, 'rb') as f:
+        with open(FILENAME_CLARIAH_XML, 'rb') as f:
             files = {'file': f}
             headers = {'source': 'nl',
                        'target': 'fr'}
@@ -183,10 +185,7 @@ class TestTranslatePageXMLNonBlocking(unittest.TestCase):
 
     def test_read(self):
 
-        path = os.path.join(ROOT,
-                            'CLARIAH-VL_examples/1KBR/De_Standaard_19190401/PERO_OCR/KB_JB840_1919-04-01_01_0.xml')
-
-        with open(path, 'rb') as f:
+        with open(FILENAME_CLARIAH_XML, 'rb') as f:
             files = {'file': f}
             headers = {'source': 'nl',
                        'target': 'fr'}
@@ -213,10 +212,7 @@ class TestTranslatePageXMLNonBlocking(unittest.TestCase):
 
     def test_upload_small(self):
 
-        path = os.path.join(DIR_EXAMPLE_FILES,
-                            'page_minimal_working_example.xml')
-
-        with open(path, 'rb') as f:
+        with open(PAGE_MINIMAL, 'rb') as f:
             files = {'file': f}
             headers = {'source': 'fr',
                        'target': 'en'}
@@ -230,10 +226,7 @@ class TestTranslatePageXMLNonBlocking(unittest.TestCase):
 
     def test_read_small(self):
 
-        path = os.path.join(DIR_EXAMPLE_FILES,
-                            'page_minimal_working_example.xml')
-
-        with open(path, 'rb') as f:
+        with open(PAGE_MINIMAL, 'rb') as f:
             files = {'file': f}
             headers = {'source': 'fr',
                        'target': 'en'}
@@ -294,6 +287,35 @@ class TestTranslatePageXMLNonBlocking(unittest.TestCase):
             self._check_tree_equal(child_i, child_j)
 
 
+class TestGetAllXMLS(unittest.TestCase):
+    def test_get_xmls(self, verbose=1):
+        response = TEST_CLIENT.get("/translate/xmls/",
+                                   # files=files,
+                                   # headers=headers
+                                   )
+
+        l = response.json()
+
+        if verbose:
+            print(len(l))
+
+        self.assertLess(response.status_code, 300)
+
+
+class TestParseXMLTextLines(unittest.TestCase):
+
+    def test_lookup_full_tm_match(self):
+        full_match = _lookup_full_tm_match('this is a test', 'en-nl')
+        self.assertIsInstance(full_match, str)
+
+    def test_parse_text_page_xml(self):
+        lines = ['this', 'this is a', 'this is a test']
+        db = next(get_db())
+        db_xml_document = _parse_text_page_xml(lines, 'en', 'nl', db)
+        self.assertIsInstance(db_xml_document, XMLDocument)
+        self.assertEqual(len(db_xml_document.lines), 3)
+
+
 def _single_line_html(l,
                       b_replace_quote=True):
     s = ''
@@ -317,30 +339,13 @@ def _get_text(el):
 
 
 def _get_tree_base():
-    path_multi_page = os.path.join(DIR_EXAMPLE_FILES,
-                                   'multilingual_page_minimal_working_example.xml')
-
-    with open(path_multi_page, 'r') as f:
+    with open(PAGE_MINIMAL_MULTI, 'r') as f:
         s_baseline = f.read()
     l_s_baseline = s_baseline.splitlines()
 
     s_baseline_single = _single_line_html(l_s_baseline)
     tree_base = etree.fromstring(s_baseline_single.encode('utf-8'))
     return tree_base
-
-
-class TestParseXMLTextLines(unittest.TestCase):
-
-    def test_lookup_full_tm_match(self):
-        full_match = _lookup_full_tm_match('this is a test', 'en-nl')
-        self.assertIsInstance(full_match, str)
-
-    def test_parse_text_page_xml(self):
-        lines = ['this', 'this is a', 'this is a test']
-        db = next(get_db())
-        db_xml_document = _parse_text_page_xml(lines, 'en', 'nl', db)
-        self.assertIsInstance(db_xml_document, XMLDocument)
-        self.assertEqual(len(db_xml_document.lines), 3)
 
 
 if __name__ == '__main__':

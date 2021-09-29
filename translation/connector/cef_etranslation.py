@@ -1,9 +1,11 @@
+import os
 from pathlib import Path
 from urllib.parse import urljoin
 
 import requests
 
-BASE_URL = 'https://etranslation.occam.crosslang.com'
+
+BASE_URL = os.environ['ETRANSLATION']
 
 
 class ETranslationConnector:

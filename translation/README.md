@@ -12,6 +12,10 @@ Our generated Xliff-page xml's are translated on text-region (paragraphs) level
 
 e.g. `translate_text_main.py xliff_page.xml fr de`
 
+## Notes
+
+* To use local, mark CEF-eTranslation_connector as a source root.
+
 ### TODO: Debugging 
 There are still some minor limitations.
 These limitations/bugs can be found by running unittest in [test/test_connector.py](test/test_connector.py)
