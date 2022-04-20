@@ -10,9 +10,10 @@ import tempfile
 import time
 import unittest
 
-import requests
-
 from translation.connector.cef_etranslation import ETranslationConnector
+
+CEF_LOGIN = os.environ.get("CEF_LOGIN")
+CEF_PASSW = os.environ.get("CEF_PASSW")
 
 ROOT_MEDIA = os.path.join(os.path.dirname(__file__), '../../media')
 
@@ -56,11 +57,12 @@ class test_timeout:
 class TestETranslationConnector(unittest.TestCase):
 
     def setUp(self) -> None:
-        self.connector = ETranslationConnector()
+        self.connector = ETranslationConnector(CEF_LOGIN, CEF_PASSW)
 
     def test_info(self):
 
-        r = requests.get(self.connector.url_info)
+        # With auth
+        r = self.connector._get(self.connector.url_info)
         with self.subTest('Status code'):
             self.assertLess(r.status_code, 300)
 
@@ -86,15 +88,15 @@ class TestETranslationConnector(unittest.TestCase):
 
         return
 
-    def test_trans_snippet_id(self):
-
-        i = '96659360'
-
-        j = self.connector.trans_snippet_id(i)
-
-        self.assertIsNotNone(j, 'Should be non-empty')
-
-        return
+    # def test_trans_snippet_id(self):
+    #
+    #     i = '96659360'
+    #
+    #     j = self.connector.trans_snippet_id(i)
+    #
+    #     self.assertIsNotNone(j, 'Should be non-empty')
+    #
+    #     return
 
     def test_trans_snippet_and_result(self):
 
@@ -180,27 +182,27 @@ class TestETranslationConnector(unittest.TestCase):
 
         self.assertIsInstance(request_id, str)
 
-    def test_trans_doc_id(self):
-        i = '96678284'
-
-        r = self.connector.trans_doc_id(i)
-
-        self.assertIsNotNone(r, 'Should be non-empty')
-
-        filename = r.get('filename')
-
-        with tempfile.TemporaryDirectory() as tmp:
-            path_filename = os.path.join(tmp, filename)
-
-            with open(path_filename, 'wb') as f:
-                f.write(r.get('content'))
-
-            print(f'File temporarily saved to {path_filename}')
-
-            with open(path_filename) as f:
-                txt = f.readlines()
-
-        return
+    # def test_trans_doc_id(self):
+    #     i = '96678284'
+    #
+    #     r = self.connector.trans_doc_id(i)
+    #
+    #     self.assertIsNotNone(r, 'Should be non-empty')
+    #
+    #     filename = r.get('filename')
+    #
+    #     with tempfile.TemporaryDirectory() as tmp:
+    #         path_filename = os.path.join(tmp, filename)
+    #
+    #         with open(path_filename, 'wb') as f:
+    #             f.write(r.get('content'))
+    #
+    #         print(f'File temporarily saved to {path_filename}')
+    #
+    #         with open(path_filename) as f:
+    #             txt = f.readlines()
+    #
+    #     return
 
     def test_trans_doc_blocking(self):
 
@@ -241,7 +243,7 @@ class TestTransXML(unittest.TestCase):
     """
 
     def setUp(self) -> None:
-        self.connector = ETranslationConnector()
+        self.connector = ETranslationConnector(CEF_LOGIN, CEF_PASSW)
 
     def test_trans_doc_blocking(self):
         source = 'fr'
@@ -283,7 +285,7 @@ class TestKBR(unittest.TestCase):
     """
 
     def setUp(self) -> None:
-        self.connector = ETranslationConnector()
+        self.connector = ETranslationConnector(CEF_LOGIN, CEF_PASSW)
 
     def test_translate(self):
         source = 'nl'

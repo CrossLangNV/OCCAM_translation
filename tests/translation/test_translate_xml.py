@@ -8,6 +8,9 @@ from xml_orm.orm import PageXML
 
 from translation.connector.cef_etranslation import ETranslationConnector
 
+CEF_LOGIN = os.environ.get("CEF_LOGIN")
+CEF_PASSW = os.environ.get("CEF_PASSW")
+
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
 FOLDER_EXAMPLE_FILES = os.path.join(ROOT, 'tests/media/example_files')
 
@@ -23,7 +26,7 @@ warnings.warn('This set of tests are deprecated since it is not advised to trans
 class TestTranslateXML(unittest.TestCase):
 
     def setUp(self) -> None:
-        self.connector = ETranslationConnector()
+        self.connector = ETranslationConnector(CEF_LOGIN, CEF_PASSW)
 
     def test_translate_working_small(self):
         FILENAME = os.path.join(FOLDER_EXAMPLE_FILES,
@@ -156,7 +159,7 @@ class TestTranslateXML(unittest.TestCase):
 
                 content = r.get('content')
 
-                with tempfile.TemporaryDirectory()  as dir:
+                with tempfile.TemporaryDirectory() as dir:
                     name_trans = os.path.splitext(name)[0] + f'_{SOURCE}_{TARGET}.xml'
 
                     filename_trans = os.path.join(dir, name_trans)
@@ -184,6 +187,7 @@ class TestTranslateXML(unittest.TestCase):
                             xml.validate()
                         except Exception:
                             self.fail("validate raised Exception unexpectedly!")
+
 
 def _get_xml_from_content(content):
     with tempfile.TemporaryDirectory() as d:

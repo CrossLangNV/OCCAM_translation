@@ -9,6 +9,9 @@ from xml_orm.orm import OverlayXML
 
 from .connector.cef_etranslation import ETranslationConnector
 
+CEF_LOGIN = os.environ.get("CEF_LOGIN")
+CEF_PASSW = os.environ.get("CEF_PASSW")
+
 
 # class XMLTranslator(object):
 #     def __init__(self, filepath, source):
@@ -258,7 +261,7 @@ class SentenceParser:
 
 def translate_list(l_text, source, target):
     # translation
-    connector = ETranslationConnector()
+    connector = ETranslationConnector(CEF_LOGIN, CEF_PASSW)
 
     with tempfile.TemporaryDirectory() as tmp_dir:
         tmp_file = os.path.join(tmp_dir, 'tmp_text_lines.txt')
@@ -280,7 +283,7 @@ def tree_transunit_source_text_translation_iter(tree, source, target):
 
     """
 
-    connector = ETranslationConnector()
+    connector = ETranslationConnector(CEF_LOGIN, CEF_PASSW)
 
     warnings.warn('No need to work with text when you can send in xliff for translation',
                   DeprecationWarning)

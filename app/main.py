@@ -3,11 +3,9 @@ import os
 import tempfile
 from itertools import cycle
 from time import sleep
-from typing import List
-from typing import Optional
+from typing import List, Optional
 
-from fastapi import Depends, FastAPI
-from fastapi import UploadFile, File, Response, Header
+from fastapi import Depends, FastAPI, File, Header, Response, UploadFile
 from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 from starlette.responses import StreamingResponse
@@ -17,9 +15,12 @@ from tm.tm_connector import MouseTmConnector
 from translation.connector.cef_etranslation import ETranslationConnector
 from translation.translate_xml import SentenceParser
 from . import crud, models, schemas
-from .database import SessionLocal, engine
+from .database import engine, SessionLocal
 from .models import XMLDocument
 from .schemas import XMLDocumentCreate, XMLDocumentLineCreate, XMLTransOut
+
+CEF_LOGIN = os.environ.get("CEF_LOGIN")
+CEF_PASSW = os.environ.get("CEF_PASSW")
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -148,7 +149,7 @@ def _submit_page_xml_translation(xml, source, target, filename, use_tm, db):
         xml.validate()
 
     # translation
-    connector = ETranslationConnector()
+    connector = ETranslationConnector(CEF_LOGIN, CEF_PASSW)
 
     # First send trans requests, then request the response.
 
@@ -191,7 +192,7 @@ def _submit_page_xml_translation(xml, source, target, filename, use_tm, db):
 
 def _read_page_xml_translation(xml_id, target, use_tm, db) -> Response:
     # translation
-    connector = ETranslationConnector()
+    connector = ETranslationConnector(CEF_LOGIN, CEF_PASSW)
 
     r = connector.trans_doc_id(xml_id)
     db_xml_trans = crud.get_xml_by_etranslation_id(db=db,
